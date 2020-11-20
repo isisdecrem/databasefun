@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="./test.js" defer type="module"></script>
+		<script src="/libs/socketio.js"></script>
+	</head>
+	<body>
+		<h3>Webcloner</h3>
+		<br />
+		<br />
+		<label for="websiteUrl">Website URL: </label>
+		<input id="websiteUrl" type="text">
+		<br />
+		<label for="directory">Directory: </label>
+		<input id="directory" type="text">
+		<br />
+		<label for="recursiveDepth">Recursive Depth</label>
+		<input id="recursiveDepth" type="number" value="0"/>
+		<br />
+		<label for="usePuppeteer">Use Puppeteer</label>
+		<input id="usePuppeteer" type="checkbox" checked />
+		<br />
+		<label for="sameDomainOnly">Same Domain Only</label>
+		<input id="sameDomainOnly" type="checkbox"/>
+		<br/>
+		<label for="removeAllQoomSticker">Remove All Qoom Sticker</label>
+		<input id="removeAllQoomSticker" type="checkbox" checked/>
+		<br/>
+		<br/>
+		<button id="submit">Clone</button>
+		<br />
+		<br />
+		<label for="outputArea">Output Area</label>
+		<br />
+		<textarea id="outputArea" style="width: 100%;height: 200px;"></textarea>
+	</body>
+</html>

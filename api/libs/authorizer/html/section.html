@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link href="/libs/authorizer/css/section.css" rel="stylesheet">
+		<style>
+		</style>
+	</head>
+	<body>
+		<h3>Authorizer</h3>
+		
+		<div>
+			<div><label class='label'>Which project is this for?</label></div>
+			<select id="project">
+				<option value="entredev">entredev</option>
+				<option value="ontrack">ontrack</option>
+				<option value="aquaroma">aquaroma</option>
+			</select>
+		</div>
+        
+        <br>
+
+        <div>
+            <div><label class='label'>Are you making a signup or login page?</label></div>
+            <input id='signup' type='radio' class='input' name="page"> Signup <br>
+            <input id='login' type='radio' class='input' name="page"> Login
+        </div>
+        
+        <br>
+
+        <div>
+            <div><label class='label'>Select all input fields you will use:</label></div>
+            <input id='firstName' type='checkbox' class='input' name="field"> First Name <br>
+            <input id='lastName' type='checkbox' class='input' name="field"> Last Name <br>
+            <input id='emailAddress' type='checkbox' class='input' name="field"> Email Address <br>
+            <input id='phoneNumber' type='checkbox' class='input' name="field"> Phone Number <br>
+            <input id='userName' type='checkbox' class='input' name="field"> Username <br>
+            <input id='password' type='checkbox' class='input' name="field"> Password <br>
+        </div>
+
+		<br>
+
+        <div>
+        	<div><label class='label'>Where do you want your page to redirect to?</label></div>
+            <input id='sitename' type='text' class='input' placeholder="Site url"/>
+        </div>
+        
+        <br>
+        
+		<div>
+			<button id="makedapage" class="btn2" onclick="makePage()">Open Page</button>
+        </div>
+
+		<br>
+        
+		<script src='/libs/restfull.js'></script>
+		<script>
+		
+			function makePage() {
+				var login = document.getElementById("login").checked ? "login" : "signup";
+				var siteurl = document.getElementById("sitename").value;
+				var fields = '';
+				var projectname = document.getElementById("project").value;
+				
+				if(document.getElementById('firstName').checked ) {
+					fields += `<div><div><input id='firstName' type='text' class='input' placeholder="First Name"/></div></div><br>`;
+				}
+				if(document.getElementById('lastName').checked ) {
+					fields += `<div><div><input id='lastName' type='text' class='input' placeholder="Last Name"/></div></div><br>`;
+				}
+				if(document.getElementById('emailAddress').checked ) {
+					fields += `<div><div><input id='emailAddress' type='email' class='input' placeholder="Email address"/></div></div><br>`;
+				}
+				if(document.getElementById('phoneNumber').checked ) {
+					fields += `<div><div><input id='phoneNumber' type='number' class='input' placeholder="Phone Number"/></div></div><br>`;
+				}
+				if(document.getElementById('userName').checked ) {
+					fields += `<div><div><input id='userName'  type='text' class='input' placeholder="Enter your username..."/></div></div><br>`;
+				}
+				if(document.getElementById('password').checked ) {
+					fields += `<div><div><input id='password' type='password' class='input' placeholder="Password"/></div></div><br>`;
+				}
+				
+				restfull.post({
+					path: `/save/file/${projectname}/${login}.html`
+					, data: { text: `<html>
+										<head>
+											<title>${login}</title>
+											<link href="/libs/authorizer/css/page.css" rel="stylesheet">
+										</head>
+										<body>
+											${fields}
+	        
+											<div>
+												<button id="submit" class="btn2">SIGN UP</button>
+									        </div>
+									        <scri\pt src="/libs/${projectname}/${login}.js"></scri\pt>
+										</body>
+									</html>`
+					}}
+				, function(err, res) {
+					location.href = `/libs/${projectname}/${login}.html`;
+				});
+				
+				restfull.post({
+					path: `/save/file/${projectname}/${login}.js`
+					, data: { text: `
+						var $submit = document.getElementById('submit');
+						$submit.addEventListener('click', sendData);
+						
+						function handleError(){
+							window.alert("Invalid Selection(s)")
+						}
+						
+						function sendData(){
+							var xhr = new XMLHttpRequest();
+							var username = document.getElementById('userName').value;
+							var password = document.getElementById('password').value;
+							var email = document.getElementById('emailAddress').value;
+							var phonenumber = document.getElementById('phoneNumber').value;
+							xhr.open('POST', \`/users/${projectname}/signup/\${username}\`);
+							xhr.setRequestHeader('content-type', 'application/json');
+							
+							xhr.send(JSON.stringify({
+								username, password, email, phonenumber
+							}));
+						}
+					`
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

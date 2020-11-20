@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				min-height:100vh;
+				margin:0;
+				display:flex;
+				flex-direction:column;
+				justify-content:flex-start;
+				align-items:center;
+			}
+			
+			main {
+				display:grid;
+				grid-template-areas: 't p' 'r r';
+				width:90vw;
+			}
+			
+			section {
+				margin:2em 0;
+			}
+			
+			h1,h2,h3 {
+				text-align:center;
+				text-transform:uppercase;
+			}
+			
+			h3 {
+				color:red;
+			}
+			
+			
+			#testcontrols {
+				grid-area:t;
+				margin-right:1em;
+			}
+			
+			#predictioncontrols {
+				grid-area:p;
+				margin-left:1em;
+			}
+			
+			#results {
+				grid-area: r;
+			}
+			
+		</style>
+		<script src = '/libs/face-api.js'> </script>
+		<script type='module'>
+			const THRESHOLD = 0.6;
+			const $results = document.querySelector('#results');
+			
+			function showError(error) {
+				$results.innerHTML = `<pre>${error}</pre>`;
+			}
+			
+			function showProgress(message) {
+				$results.innerHTML = `<pre>${message}</pre>`;
+			}
+			
+			function addMessage(message, tag) {
+				tag = tag || 'div';
+				const $el = document.createElement(tag);
+				$el.innerHTML = message;
+				$results.appendChild($el);
+			}
+			
+			async function loadModel(modelName) {
+				showProgress(`Loading ${modelName}`);
+				await faceapi.nets[modelName].loadFromUri('/libs/models');
+			}
+			
+			async function loadAI() {
+				await loadModel('ssdMobilenetv1');
+				await loadModel('ssdMobilenetv1');
+				await loadModel('tinyFaceDetector');
+				await loadModel('mtcnn');
+				await loadModel('faceLandmark68Net');
+				await loadModel('faceLandmark68TinyNet');
+				await loadModel('faceRecognitionNet');
+				await loadModel('faceExpressionNet');
+				await loadModel('ageGenderNet');
+			}
+			
+			function loadImage(url) {
+			  return new Promise((resolve, reject) => {
+			    const img = new Image();
+			    img.addEventListener('load', () => resolve(img));
+			    img.addEventListener('error', reject); 
+			    img.src = url;
+			  });
+			}
+			
+			async function analyzeUrl(url) {
+				let img, $canvas, ctx, ratio, displaySize, resizedDetections;
+				img = await loadImage(`/image?url=${encodeURIComponent(url)}`);
+				ratio = img.height/img.width;
+				$canvas = document.createElement('canvas');
+				$canvas.width = 500;
+				$canvas.height = 500*ratio;
+				displaySize = {
+					width: $canvas.width,
+					height: $canvas.height,
+				}
+				faceapi.matchDimensions($canvas, displaySize);
+				ctx = $canvas.getContext('2d');
+				ctx.drawImage(img, 0, 0, $canvas.width, $canvas.height);
+				$results.appendChild($canvas);
+				
+				let results = await faceapi
+					.detectSingleFace($canvas)
+					.withFaceLandmarks()
+					.withFaceDescriptor();
+				if(!results) return;
+				resizedDetections = faceapi.resizeResults(results, displaySize);
+				faceapi.draw.drawDetections($canvas, resizedDetections);
+				faceapi.draw.drawFaceLandmarks($canvas, resizedDetections);
+				return results;
+			}
+			
+			async function analyzeFaces(ids) {
+				let img, $canvas, ctx, ratio, displaySize, resizedDetections;
+				const analysis = [];
+				for(var i = 0; i < ids.length; i++) {
+					img = await loadImage(`/face/${ids[i]}`);
+					ratio = img.height/img.width;
+					$canvas = document.createElement('canvas');
+					$canvas.width = 500;
+					$canvas.height = 500*ratio;
+					displaySize = {
+						width: $canvas.width,
+						height: $canvas.height,
+					}
+					faceapi.matchDimensions($canvas, displaySize);
+					ctx = $canvas.getContext('2d');
+					ctx.drawImage(img, 0, 0, $canvas.width, $canvas.height);
+					$results.appendChild($canvas);
+					
+					let results = await faceapi
+						.detectSingleFace($canvas)
+						.withFaceLandmarks()
+						.withFaceDescriptor();
+					if(!results) continue;
+					resizedDetections = faceapi.resizeResults(results, displaySize);
+					faceapi.draw.drawDetections($canvas, resizedDetections);
+					faceapi.draw.drawFaceLandmarks($canvas, resizedDetections);
+					analysis.push(results);
+				}
+				return analysis;
+			}
+			
+			window.test = async function() {
+				try {
+					const label = document.querySelector('#testcontrols input').value.trim();
+					if(!label) return showError('Please enter a test label');
+					
+					showProgress('Fetching images');
+					const resp = await fetch(`/match/test?label=${encodeURIComponent(label)}`)
+					const json = await resp.json();
+					await loadAI();
+					addMessage('Test Analysis', 'h2');
+					const testAnalysis = await analyzeFaces(json.test);
+					const descriptors = testAnalysis.map(t => t.descriptor);
+					const labeledDescriptors = new faceapi.LabeledFaceDescriptors(label, descriptors)
+					const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors);
+					
+					addMessage('Train Analysis', 'h2');
+					const trainAnalysis = await analyzeFaces(json.train);
+					
+					addMessage('Results', 'h2');
+					const matchResults  = trainAnalysis.map(t => faceMatcher.findBestMatch(t.descriptor))
+					const passCount = matchResults.filter(t => t.distance <= THRESHOLD).length;
+					const failCount = matchResults.filter(t => t.distance > THRESHOLD).length;
+					const distances = matchResults.map(t => t.distance)
+					const average =distances.reduce((s, d) => s+=d, 0)/matchResults.length;
+					const max = Math.max.apply(null, distances)
+					const min = Math.min.apply(null, distances)
+					addMessage(`Passed: ${passCount}`);
+					addMessage(`Failed: ${failCount}`);
+					addMessage(`Average: ${average.toFixed(2)}`);
+					addMessage(`Max: ${max.toFixed(2)}`);
+					addMessage(`Min: ${min.toFixed(2)}`);
+				} catch(ex) {
+					showError(ex + '')
+				}
+				
+			}
+			
+			window.predict = async function() {
+				try {
+					const label = document.querySelector('#predictioncontrols input#label').value.trim();
+					const url = document.querySelector('#predictioncontrols input#url').value.trim();
+					if(!label) return showError('Please enter a prediction label');
+					if(!url) return showError('Please enter a prediction url');
+					
+					showProgress('Fetching images');
+					const resp = await fetch(`/match/predict?label=${encodeURIComponent(label)}&url=${encodeURIComponent(url)}`)
+					const json = await resp.json();
+					showProgress(JSON.stringify(json, null, 2));
+					await loadAI();
+					addMessage('Sample Analysis', 'h2');
+					const sampleAnalysis = await analyzeFaces(json.sample);
+					const descriptors = sampleAnalysis.map(t => t.descriptor);
+					const labeledDescriptors = new faceapi.LabeledFaceDescriptors(label, descriptors)
+					const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors);
+					
+					addMessage('Image Analysis', 'h2');
+					const imageAnalysis = await analyzeUrl(url);
+					const matchResults  =  faceMatcher.findBestMatch(imageAnalysis.descriptor)
+					addMessage('Results', 'h2');
+					addMessage(`Distance to ${label}: ${matchResults.distance}`);
+					
+					
+				} catch(ex) {
+					showError(ex + '')
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<header>
+			<h1>Face Matcher</h1>
+		</header>
+		<main>
+			<section id='testcontrols'>
+				<input type='text' placeholder='Enter face label'  value='Hikaru Nakamura'>
+				<button onclick='test()'>Test</button>
+			</section>
+			<section id='predictioncontrols'>
+				<input type='text' id='url' placeholder='Enter image url' value='https://colorostariu.files.wordpress.com/2014/06/victor-hugo-poete-dramaturge-prosateur-romantique-paris-france-pair-de-france-l-academie-francaise-pantheon-notre-dame-de-paris-roman-poesie-theatre-pamphlet.jpg'>
+				<input type='text' id='label' placeholder='Enter face label' value='Hikaru Nakamura'>
+				<button onclick='predict()'>Predict</button>
+			</section>
+			<section id='results'>
+				<h2>Run a test or a prediction.</h2>
+			</section>
+		</main>
+		<footer>
+			
+		</footer>
+	</body>
+</html>

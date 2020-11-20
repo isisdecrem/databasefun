@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css">
+		<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+    	
+        <style type="text/css" media="screen">
+        	body {
+        		margin: 0px;
+        	}
+        	
+        	.ace-multi-cursor {
+        		position: absolute;
+        	}
+        	
+        	.ace-multi-cursor-tooltip {
+        		position: absolute;
+        	}
+        	
+        	.ace-multi-selection {
+        		position: absolute;
+        	}
+        	
+        	#set-name {
+        		position: absolute;
+        		right: 0px;
+        		top: 0px;
+        	}
+        	
+        	#toggle-share {
+        		position: absolute;
+        		right: 0px;
+        		top: 30px;
+        		display: none;
+        	}
+        </style>
+    </head>
+    <body>
+      <div class="wrapped-editor">
+        <div class="editor" id="ace-editor" style="height: 100%; width: 400px;"></div>
+      </div>
+      
+      <button id = "set-name">Set Name</button>
+      <button id = "toggle-share">Stop Share</button>
+
+      <script src="/collaber/js/ace.js"></script>  
+      <script src="/collaber/js/ace-collab-ext.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/collaber/js/color-assigner.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/collaber/js/rxjs.umd.min.js"></script>
+      <script src="/collaber/js/convergence.global.js"></script>
+      
+      <script type='module'>
+      	import Modal from '/libs/modal/script.js'
+    	
+    	function dcNotification() {
+    		const notifModal = new Modal({
+				modalContainerId: 'notifModal'
+				, modalTitleText: `Disconnected!`
+				, modalContentsInnerHTML: `<p>The owner of this file has stopped collaborating. You are now unable to make changes to the file.</p>`
+				, modalSubmitBtnText: 'OK'
+				, modalSubmitBtnAction: function(){
+					notifModal.destroy();
+				}
+			})
+	
+			notifModal.show();
+    	}
+      </script>
+      
+      <script>
+    	{{SECTIONJS}}
+      </script>
+    </body>
+</html>

@@ -1,0 +1,129 @@
+.register-modal {
+	z-index:10000;
+	position:fixed;
+}
+
+.register-modal .qoom-modal {
+	min-height: 480px;
+	width:720px;
+	position:relative;
+}
+
+.register-modal .register-modal-close {
+	position:absolute;
+	bottom:1rem;
+	right:2rem;
+	cursor: pointer;
+}
+
+.register-modal .register-modal-close:hover {
+	text-decoration: underline;
+}
+
+
+.register-modal .register-modal-grid {
+	display:grid;
+	grid-template: "a b c"
+				   "d b e"
+				   "d b e";
+	grid-template-columns: 49% 2% 49%;
+	grid-gap: 0 0;
+	margin-top:20vh;
+}
+
+.register-modal-grid-signup-header {
+	grid-area: a;
+	text-align: center;
+}
+
+.register-modal-grid-signup-header h2 {
+	display:block;
+	text-align: center;
+	margin-top:2rem;
+}
+
+.register-modal-grid-signup-contents {
+	grid-area: d;
+	text-align: center;
+}
+
+.register-modal-grid-signup-contents input {
+	display:block;
+	text-align: left;
+	padding:1rem;
+	margin:auto;
+	margin-top:2rem;
+	width: 80%;
+	font-size:1.5rem;
+}
+
+.register-modal-grid-signup-contents h3 {
+	display:block;
+	text-align: center;
+	margin-top:2rem;
+}
+
+.register-modal-grid-signup-contents button {
+	display:block;
+	text-align: center;
+	margin:auto;
+	margin-top:2rem;
+	width: 60%;
+	font-size:1.5rem;
+}
+
+.register-modal-grid-signin-header {
+	grid-area: c;
+	text-align: center;
+}
+
+.register-modal-grid-signin-header h2 {
+	display:block;
+	text-align: center;
+	margin-top:2rem;
+}
+
+.register-modal-grid-signin-contents {
+	grid-area: e;
+	text-align: center;
+}
+
+.register-modal-grid-signin-contents input {
+	display:block;
+	text-align: left;
+	padding:1rem;
+	margin:auto;
+	margin-top:2rem;
+	width: 80%;
+	font-size:1.5rem;
+
+}
+
+.register-modal-grid-signin-contents h3 {
+	display:block;
+	text-align: center;
+	margin-top:2rem;
+}
+
+.register-modal-grid-signin-contents button {
+	display:block;
+	text-align: center;
+	margin:auto;
+	margin-top:2rem;
+	width: 60%;
+	font-size:1.5rem;
+
+}
+
+
+.register-modal-grid-separator {
+	grid-area: b;
+	background-color:black;
+	margin-left:calc(50% - 1px);
+	margin-right:calc(50% - 1px);
+	margin-top:4rem;
+	margin-bottom:4rem;
+	height:100%;
+}
+
+

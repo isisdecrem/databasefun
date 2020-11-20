@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<h1>QOOM ERROR REPORT</h1>
+		{{notificationMessage}}
+		
+	</body>
+</html>

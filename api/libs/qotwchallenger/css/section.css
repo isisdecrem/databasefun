@@ -1,0 +1,84 @@
+#challenges {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content: flex-start;
+	margin-top:80px;
+}
+
+#challenges aside {
+	padding-top:10px;
+}
+
+#challenges aside a {
+	display:inline !important;
+}
+
+#challenges > h3 {
+	margin-bottom:20px;
+	text-align:left;
+	width:800px;
+}
+
+#challenges .card {
+	width:800px;
+	margin-bottom:48px;
+	box-sizing:border-box;
+	border:solid 1px var(--color-gray-400);
+	padding:24px 40px;
+	border-radius: 4px;
+}
+
+#challenges .card > h4 {
+	color: var(--color-primary);
+}
+
+#challenges .card > div {
+	margin-top: 30px;
+	display:grid;
+	grid-template-columns: auto 160px;
+	grid-template-rows: 50px 50px 50px;
+}
+
+#challenges .card > div > div {
+	display:flex;
+	align-items:center;
+}
+
+#challenges .card span {
+	font-size: 16px;
+	font-weight: 400;
+}
+
+#challenges .card span:first-child {
+	margin-right:48px;
+}
+
+#challenges .card a {
+	display:block;
+	width:100%;
+	height:40px;
+}
+
+#challenges .card button {
+	width:100%;
+	height:100%;
+	border-radius:4px;
+	border:solid 1px var(--color-blue);
+	background-color:white;
+	font-size:16px;
+	font-weight:400;
+	color: var(--color-blue);
+	cursor:pointer;
+}
+
+#challenges .card button:hover {
+	background-color: var(--color-blue-10);
+}
+
+#challenges .card button[disabled] {
+	color:white;
+	background-color:#00000030;
+	border:transparent;
+	cursor:not-allowed;
+}

@@ -1,0 +1,108 @@
+<style>
+	
+	#textControls {
+		margin-top:20px;
+	}
+	
+	input {
+		background-color:#191919;
+		border-width:1px;
+		border-radius:5%;
+		margin-top:20px;
+	}
+	
+	#heightInput {
+		width:150px;
+		height:40px;
+	}
+
+	#thing {
+		margin-top: 20px;
+	}
+	input::placeholder {
+		font-size: 20px;
+		color:white;
+	}
+	
+	#generateText {
+		border-radius: 30%;
+	}
+	
+	#widthInput {
+		width:150px;
+		height:40px;
+	}
+	
+	#titleInput {
+		width:150px;
+		height:40px;
+	}
+	
+	#descriptionInput {
+		width:150px;
+		height:40px;
+	}
+	
+	input, select{
+    	color: white;
+    	font-size:20px;
+	}
+	
+	#settingsheader {
+		font-size:20px;
+	}
+	
+	#settingsgroup {
+		color:#b6c8d0;
+	}
+	
+	#copyAndSave {
+		display:block;
+    	width:13vw;
+    	margin:auto;
+    	margin-top:20px;
+    	border:solid 1px #000000;
+    	height:5vh;
+    	font-size:2vmax;
+    	background-color:#b6c8d0;
+    	box-shadow: 2px 3px #F7CAC9;
+	}
+	
+	.meta label {
+		margin-top:20px;
+		display:block;
+	}
+	
+	.meta input {
+		margin:0;
+	}
+</style>
+
+<div id='settingsgroup'>
+	<h3 id='settingsheader'>Information</h3>
+	<p>Use this to see the properties of this image!</p>
+</div>
+	
+<div id = "textControls">
+	<div class = "size">
+		<label>Height:</label>
+		<input type="text" id="heightInput" placeholder="height">
+	</div>
+	
+	<div class = "size">
+		<label>Width:</label>
+		<input type="text" id="widthInput" placeholder="width">
+	</div>
+	
+	<div class = "meta">
+		<label>Title:</label>
+		<input type="text" id="titleInput" placeholder="title">
+	</div>
+	
+	<div class = "meta">
+		<label>Description:</label>
+		<input type="text" id="descriptionInput" placeholder="description">
+	</div>
+	<button id="copyAndSave">Save as</button>
+	
+</div>

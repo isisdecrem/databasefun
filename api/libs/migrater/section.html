@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Connect to Git | Qoom</title>
+		<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css" />
+		<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css" />
+		<script src="/libs/socketio.js"></script>
+		<script type="module" defer="defer" src="/libs/migrater/section.js"></script>
+		<style>
+			{{BASECSS}}
+			{{STYLES}}
+		</style>
+		<link rel="stylesheet" type="text/css" href="/libs/migrater/section.css" />
+	</head>
+	<body>
+		<header>
+			{{MENU}}
+			{{HEADER}}
+		</header>
+		<main class="migrater-page-container">
+			<section class="migrater-main-container">
+				<div class="migrater-title-container">
+					<h4 class="migrater-title">Connect Your Coding Space to Git</h4>
+				</div>
+				<div class="migrater-content-box">
+					<div class="migrater-content">
+						<p><i class="ic-question-circle"></i>Find more about <a href="https://www.qoom.io/help/development/connect-to-git" target="_blank">Connect to Git</a></p>
+						<div class="migrater-git-past-connections-page migrater-content migrater-full-width">
+							<div class="migrater-git-past-connections-container">
+								<div class="migrater-git-past-connection">
+									<div class="migrater-git-past-connection-auth-container">
+										<div><div>Access Token:</div><div>{token}</div></div>
+										<div><div>Username:</div><div>{username}</div></div>
+										<div><div>URL:</div><div>{url}</div></div>
+									</div>
+									<div class="migrater-git-past-connection-button-container">
+										<div class="qoom-main-btn qoom-button-outline qoom-button-small">Delete</div>
+										<div class="qoom-main-btn qoom-button-full qoom-button-small migrater-git-past-connection-button">Use</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="migrater-git-connect-page migrater-content migrater-full-width">
+							<div class="form-input">
+								<div class="migrater-git-grid input-items">
+									<p>Access Token</p>
+									<input type="text" class="migrater-input migrater-git-auth-token" />
+								</div>
+								<div class="migrater-git-grid input-items">
+									<p>Git User Name</p>
+									<input type="text" class="migrater-input migrater-git-username" />
+								</div>
+								<div class="migrater-git-grid input-items">
+									<p>Git URL</p>
+									<input type="text" class="migrater-input migrater-git-url" placeholder='https://github.com, https://gitlab.com' />
+								</div>
+							</div>
+						</div>
+						<div style='display:flex; flex-direction:row-reverse; width:100%;'>
+							<button id='add-git-token' class='qoom-main-btn qoom-button-full qoom-button-small' >Add</button>
+						</div>
+						<div class='migrater-git-past-connections-container'></div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>{{FOOTER}}</footer>
+		<script>
+			{{BASEJS}}
+			{{SCRIPT}}
+		</script>
+	</body>
+</html>

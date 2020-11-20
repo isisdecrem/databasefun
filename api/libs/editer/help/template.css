@@ -1,0 +1,195 @@
+body {
+	color: var(--text-dark-high);
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	margin:0;
+	padding:0;
+	text-rendering: optimizelegibility;
+	width: 100%;
+}
+
+main {
+	box-sizing: border-box;
+	font-size: 16px;
+	line-height: 1.25;
+	margin: 0 auto 80px;
+	max-width: 712px;
+	padding: 0 16px;
+}
+
+#helpArticle h2, #helpArticle h3, #helpArticle h4, #helpArticle h5, #helpArticle h6 {
+	margin-block-start: 2em;
+	margin-block-end: 1em;
+}
+/* title */
+#helpArticle h1 {
+  font-size: 32px; 
+  font-weight: 500;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+/* subheading */
+#helpArticle h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+#helpArticle h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#helpArticle h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#helpArticle h5 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#helpArticle h6 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#helpArticle a, #helpArticle a:visited {
+	color: var(--color-primary);
+	text-decoration: underline;
+}
+
+#helpArticle p {
+	font-size: 1rem;
+	hyphens: auto;
+	line-height: 1.5;
+	margin-block-start: 1.5em;
+	margin-block-end: 1.5em;
+}
+#helpArticle ul {
+	list-style-type: disc;
+	list-style-position: inside;
+}
+#helpArticle ol {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+#helpArticle li {
+	margin: 8px 0;
+}
+#helpArticle strong {
+	font-weight: 500;
+}
+
+#helpArticle blockquote {
+	background: var(--color-gray-10);
+	border-left: 8px solid var(--text-dark-high);
+	margin: 24px 0;
+	padding: 12px 24px;
+}
+
+#helpArticle blockquote p {
+	margin-block-start: 0.5em;
+	margin-block-end: 0.5em;
+}
+
+#helpArticle hr {
+	margin-top: 2.5rem;
+	margin-bottom: 1.5rem;
+	border-top: 1px solid var(--color-gray-100);
+}
+
+#helpArticle pre {
+	background-color: var(--text-dark-high);
+	border-radius: 8px;
+	color: #fff;
+	font-family: 'Fira Code', monospace;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	overflow: auto;
+	padding: 16px 24px;
+	tab-size: 2em;
+}
+
+#helpArticle code {
+	background-color: var(--color-primary-10);
+	border-radius: 4px;
+	color: var(--color-primary);
+	font-family: 'Fira Code', monospace;
+	font-weight: 400;
+	line-height: 20px;
+	margin: 0;
+	padding: 2px 6px;
+	word-wrap: break-word;
+	tab-size: 2em;
+}
+
+#helpArticle pre > code {
+	background: transparent;
+	color: #fff;
+	line-height: 1.5;
+	padding:0;
+}
+
+#helpArticle table {
+	border-collapse: collapse;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	padding: 0;
+	width: 100%;
+}
+#helpArticle table tr {
+	border-top: 1px solid var(--color-gray-100);
+	margin: 0;
+	padding: 0;
+}
+#helpArticle table thead tr {
+	border-bottom: 1px solid var(--text-dark-high);
+}
+
+#helpArticle table tr th {
+	font-weight: 500;
+	margin: 0;
+	padding: 8px 16px;
+	text-align: left;
+}
+#helpArticle table tbody tr:nth-child(odd) {
+	background-color: var(--color-gray-10);
+}
+#helpArticle table tbody tr:last-child {
+	border-bottom: 1px solid var(--color-gray-100);
+}
+#helpArticle table tr td {
+	margin: 0;
+	padding: 8px 16px;
+	text-align: left;
+}
+
+#helpArticle img {
+	display: block;
+	margin: 32px 0;
+	max-width: 100%;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#helpArticle button {
+	border: 1px solid var(--color-primary);
+	background-color: var(--color-primary);
+	color: #fff;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 16px;
+	border-radius: 0;
+}
+
+#helpArticle video {
+	width: 100%;
+	height: auto;
+	border: 1px solid #f4f6f7;
+	outline: none;
+	margin: 8px 0 24px;
+}

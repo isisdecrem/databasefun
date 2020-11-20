@@ -1,0 +1,468 @@
+<div><button id="contactMe" style="cursor: pointer;">Contact</button></div>
+
+<script src="../../libs/restfull.js"></script>
+<script type="module">
+//code for contact me button
+
+	import Modal from '/libs/modal/script.js';
+	
+	var modalCss = `
+		:root {
+			--color-primary: #0067f4; /* qoom blue */
+			--color-navy: #0c1440;
+			--color-blue: #0067f4;
+			--color-orange: #F28729;
+			--color-red: #E84855;
+			--color-yellow: #F7C660;
+			--color-green: #4da422;
+			  
+			--color-gray-400: #9a9b9c;
+			--color-gray-300: #aeafb0;
+			--color-gray-200: #c2c3c4;
+			--color-gray-100: #d7d7d7;
+			--color-gray-50: #ebebeb;
+			--color-gray-10: #f4f6f7;
+			  
+			--color-blue-10: #e6f0fe;
+			--color-blue-50: #cce1fd;
+			--color-blue-100: #99c2fa;
+			--color-blue-200: #66a3f8;
+			--color-blue-300: #3285f6;
+			--color-blue-500: #0052c3;
+			--color-blue-600: #003d92;
+			--color-blue-700: #002961;
+			  
+			--color-primary-10: #e6f0fe;
+			--color-primary-50: #cce1fd;
+			--color-primary-100: #99c2fa;
+			--color-primary-200: #66a3f8;
+			--color-primary-300: #3285f6;
+			--color-primary-500: #0052c3;
+			--color-primary-600: #003d92;
+			--color-primary-700: #002961;
+			  
+			--color-red-10: #fdedee;
+			--color-red-50: #fadadd;
+			--color-red-100: #f6b6bb;
+			--color-red-200: #f19199;
+			--color-red-300: #ed6d77;
+			 
+			--color-light-gray: #F4F6F7;
+			--color-light-blue: #D8E6F2;
+			  
+			--color-dark-blue: #020873;
+			--color-dark-navy: #0C1440;
+			  
+			--color-cloud-purple: #B175FF;
+			
+			/* text colors for light background */
+			--text-dark-high: #212121;
+			--text-dark-medium: #676768;
+			--text-dark-disabled: #9a9b9c;
+			
+			/* text colors for dark background */
+			--text-white-high: rgba(255,255,255,1);
+			--text-white-medium: rgba(255,255,255,0.6);
+			--text-white-disabled: rgba(255,255,255,0.38);
+			  
+			/* icon filter */
+			--ic-primary: invert(22%) sepia(72%) saturate(3462%) hue-rotate(205deg) brightness(100%) contrast(108%);
+			--ic-text-dark-high: invert(0%) sepia(6%) saturate(34%) hue-rotate(113deg) brightness(112%) contrast(74%);
+			--ic-gray-400: invert(73%) sepia(6%) saturate(65%) hue-rotate(169deg) brightness(84%) contrast(85%);
+			--ic-gray-200: invert(91%) sepia(3%) saturate(83%) hue-rotate(169deg) brightness(88%) contrast(88%);
+		}
+		#contactMeModal textarea {
+		    font-family: inherit; /* 1 */
+		    font-size: 100%; /* 1 */
+		    line-height: 1.15; /* 1 */
+		    margin: 0; /* 2 */
+		    overflow: auto;
+		}
+		#contactMeModal .row {
+			display: -ms-flexbox;
+			display: flex;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			margin-right: -15px;
+			margin-left: -15px;
+		}
+		#contactMeModal .justify-content-center {
+			-ms-flex-pack: center!important;
+			justify-content: center!important;
+		}
+		#contactMeModal .col-lg-12 {
+			position: relative;
+		    width: 100%;
+		    padding-right: 15px;
+		    padding-left: 15px;
+		}
+		@media (min-width: 992px) {
+			#contactMeModal .col-lg-12 {
+				-ms-flex: 0 0 100%;
+				flex:  0 0 100%;
+				max-width: 100%;
+			}
+		}
+		#contactMeModal .form-input label {
+			font-size: 12px;
+			line-height: 1.5;
+			color: var(--text-dark-medium);
+			margin-bottom: 8px;
+			display: block;
+			text-align: left !important;
+		}
+		#contactMeModal .form-input {
+			margin-bottom: 16px;
+		}
+		#contactMeModal .form-input .input-items {
+			position: relative;
+		}
+		#contactMeModal .form-input .input-items input,
+		#contactMeModal .form-input .input-items text,
+		#contactMeModal .form-input .input-items-optional input,
+		#contactMeModal .form-input .input-items textarea,
+		#contactMeModal .form-input .input-items select {
+			width: 100%;
+			height: 48px;
+			border: 1px solid;
+			border-radius: 4px;
+			padding-left: 16px;
+			padding-right: 48px;
+			position: relative;
+			font-size: 1rem;
+		}
+		#contactMeModal .form-input .input-items textarea {
+			padding-top: 8px;
+			height: 130px;
+			resize: none;
+		}
+		#contactMeModal .qoom-main-btn {
+			border: 2px solid transparent;
+			border-radius: 4px;
+			color: var(--color-primary);
+			cursor: pointer;
+			display: inline-block;
+			font-size: 16px;
+			font-weight: 600;
+			line-height: 44px;
+			text-align: center;
+			text-decoration: none;
+			text-transform: uppercase;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			padding: 0 32px;
+			position: relative;
+			white-space: nowrap;
+			width: 100%;
+			-webkit-transition: all 0.3s ease-out 0s;
+			-moz-transition: all 0.3s ease-out 0s;
+			-ms-transition: all 0.3s ease-out 0s;
+			-o-transition: all 0.3s ease-out 0s;
+			transition: all 0.3s ease-out 0s;
+			z-index: 5;
+		}
+		@media (max-width: 767px) {
+		  #contactMeModal .qoom-main-btn {
+		  	border: 1px solid transparent;
+		    font-size: 14px;
+		    padding: 4px 16px;
+		    line-height: 30px;
+		  }
+		}
+		#contactMeModal .qoom-button-small {
+			font-size: 14px;
+			padding: 0 24px;
+			line-height: 36px;
+		}
+		@media (max-width: 767px) {
+		  #contactMeModal .qoom-button-small {
+		  	font-size: 12px;
+		    padding: 0 16px;
+		    line-height: 30px;
+		  }
+		}
+		#contactMeModal .qoom-button-outline {
+			background-color: #fff;
+			border-color: var(--color-primary);
+		}
+		#contactMeModal .qoom-button-outline:hover {
+			background-color: var(--color-primary-600);
+			border-color: var(--color-primary-600);
+			color: #fff;
+		}
+		#contactMeModal .qoom-button-full {
+			background-color: var(--color-primary);
+			color: #fff;
+			
+		}
+		#contactMeModal .qoom-button-full:hover {
+			background-color: var(--color-primary-600);
+			color: #fff;
+		}
+		#contactMeModal .modal-background {
+			background-color: rgba(0, 0, 0, 0.38);
+			height: 100vh;
+			left: 0;
+			margin: 0;
+			padding: 0;
+			position: fixed;
+			top: 0;
+			width: 100vw;
+			z-index: 5;
+		}
+		#contactMeModal .modal {
+			--scale-value: 1;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+			display: block;
+			left: 50%;
+			min-height: 12rem;
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%) scale(var(--scale-value));
+			animation: popup 0.3s ease 0s;
+			width: 32rem;
+			height: unset;
+			z-index: 6;
+		}
+		
+		@keyframes popup {
+			from {
+				opacity: 0;
+				--scale-value: 0.8;
+			}
+			to {
+				opacity: 1;
+				--scale-value: 1;
+			}
+		}
+		#contactMeModal .modal .modal-title {
+			background-color: var(--color-primary);
+			height: 56px;
+			margin: 0;
+			padding: 8px 24px;
+		}
+		#contactMeModal .modal .modal-title h1 {
+			color: #fff;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 40px;
+			text-align: left;
+			margin: 0
+		}
+		#contactMeModal .modal .modal-container {
+			font-weight: 300 !important;
+			padding: 24px 24px;
+		}
+		#contactMeModal .modal .modal-container .modal-description {
+			color: var(--text-dark-high);
+			font-weight: 300;
+			hyphens: auto;
+			line-height: 1.5;
+			margin-bottom: 16px;
+		}
+		#contactMeModal .modal .modal-container .modal-description p {
+			margin-bottom: 8px;
+		}
+		#contactMeModal .modal .modal-container .modal-description div {
+			margin-bottom: 12px;	
+		}
+		#contactMeModal .modal .modal-container .domain-name-container
+		,#contactMeModal .modal .modal-container .coding-space-container {
+			width: fit-content;
+			width: -moz-fit-content;
+			width: -webkit-fit-content;
+			height: 40px;
+			line-height: 1.5;
+			padding: 8px 12px;
+			background-color: var(--color-light-blue);
+			border-radius: 4px;
+			margin-top: 4px;
+			margin-left: -4px;
+		}
+		#contactMeModal .modal .form-input label::after {
+			content: "";
+		}
+		#contactMeModal .modal .form-input .input-items {
+			display: flex;
+			flex-direction: row;
+			flex-grow: 1;
+			flex-wrap: nowrap;
+		}
+		#contactMeModal .modal .form-input .input-items input
+		,#contactMeModal .modal .form-input .input-items-optional input {
+			height: 38px;
+			padding-left: 16px;
+			padding-right: 16px;
+		}
+		#contactMeModal .modal .form-input.url span:first-child{
+			margin-right: 8px;
+		}
+		#contactMeModal .modal .form-input .description {
+			color: var(--color-primary);
+			font-size: 12px;
+		}
+		#contactMeModal .modal .buttons-container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: flex-end;
+			margin-top: 24px;
+		}
+		#contactMeModal .modal .buttons-container button {
+			margin-left: 16px;
+			min-width: 120px;
+			width: fit-content;
+			width: -moz-fit-content;
+			width: -webkit-fit-content;
+		}
+		#contactMeModal .modal .form-input .input-items .domain-name {
+			line-height: 48px;
+			margin-left: 8px;
+		}
+		#contactMeModal .modal .form-input.url .input-items input {
+			width: 240px;
+		}
+		#contactMeModal .modal .form-input.password-reset {
+			text-align: right;
+		}
+		@media (max-width: 577px) {
+			#contactMeModal .modal {
+				font-size: 14px;
+				max-width: 480px;
+				width: calc(100% - 32px);
+			}
+			#contactMeModal .modal .buttons-container {
+				justify-content: flex-start;
+			}
+			#contactMeModal .modal .buttons-container button {
+				margin-left: 0;
+			}
+			#contactMeModal .modal .buttons-container button:last-child {
+				flex: 1 0 auto;
+				margin-left: 8px;
+			}
+			#contactMeModal .modal .form-input .input-items .domain-name {
+				line-height: 48px;
+				margin-left: 8px;
+			}
+			#contactMeModal .modal .form-input.url .input-items input {
+				width: 120px;
+			}
+		}
+		#contactMeModal i {
+			height: 48px;
+			width: 48px;
+			background-position: center;
+			background-repeat: no-repeat;
+			display:inline-block;	
+		}
+		#contactMeModal i.ic-email-sent {
+			background-image: url(/libs/icons/email-sent.svg);
+			margin-left: calc(50% - 100px);
+		}
+	`;
+	
+	const $contactMeModal = new Modal({
+		modalContainerId : 'contactMeModal'
+		, modalTitleText : 'Leave a Message'
+		, modalContentsInnerHTML: `
+		<div class="form-input">
+			<div class="form-input">
+				<label required>First Name *</label>
+				<div class="input-items default empty">
+					<input id="modalFirst">
+				</div>
+			</div>
+			<div class="form-input">
+				<label required>Last Name *</label>
+				<div class="input-items default empty">
+					<input id="modalLast">
+				</div>
+			</div
+			<div class="form-input">
+				<label required>Email Address *</label>
+				<div class="input-items default empty">
+					<input id="modalEmail">
+				</div>
+			</div>
+			<div class="form-input">
+				<label>Message</label>
+				<div class="input-items default empty">
+					<textarea id="modalMessage" type="text" value=""></textarea>
+				</div>
+			</div>
+		</div>
+		`
+		, modalCancelBtnText: 'Cancel'
+		, modalSubmitBtnText: 'Send'
+		, modalCancelBtnAction: function() {
+			$contactMeModal.destroy();
+			removeStyles();
+		}
+		, modalSubmitBtnAction: function() {
+			sendEmail();
+		}
+	})
+	var $contactMeBtn = document.getElementById('contactMe');
+	
+	function addStyles() {
+		var $meta = document.getElementsByTagName('head')[0].firstElementChild;
+		var $modalCss = document.createElement('style');
+		$modalCss.id = 'modalCss';
+		$modalCss.innerHTML = modalCss;
+		document.getElementsByTagName('head')[0].insertBefore($modalCss, $meta);
+	}
+	
+	function removeStyles() {
+		document.getElementById('modalCss').parentElement.removeChild(document.getElementById('modalCss'));
+	}
+	
+	function sendEmail() {
+		var first = document.getElementById('modalFirst').value;
+		var last = document.getElementById('modalLast').value;
+		var emailInput = document.getElementById('modalEmail').value;
+		var textAreaInput = document.getElementById('modalMessage').value;
+		if(!first) return;
+		if(!last) return;
+		if(!emailInput) return;
+
+		const emailInfo = {};
+		emailInfo.name = `${first} ${last}`;
+		emailInfo.text = `from: ${first} ${last} \nemail: ${emailInput} \nmessage: ${textAreaInput}`;
+		emailInfo.subject = `Email from ${first} ${last} on Profile Page`
+
+		restfull.post({ path: '/email/contactemail', data: { emailInfo: emailInfo }}, (err, resp) => {
+			if(err) return console.log(err);
+
+			document.querySelector('#contactMeModal .modal-title h1').innerText = 'Message Sent';
+			document.querySelector('#contactMeModal .modal-container').innerHTML = `
+			<div class="row justify-content-center">
+		    	<div class="col-lg-12">
+		    		<i class="ic-email-sent" style="height: 200px; width: 200px;"></i>
+		    		<p style="text-align: center;">Message has been sent!</p>
+		        </div>
+		    </div>
+		    <div class="buttons-container">
+			    <button id="modalCloseBtn" class="qoom-main-btn qoom-button-full qoom-button-small" type="cancel">Close</button>
+		    </div>
+			`;
+			var $contactMeModal = document.getElementById('contactMeModal');
+			var $modalCloseBtn = document.getElementById('modalCloseBtn');
+			$modalCloseBtn.addEventListener('click', function(){
+				$contactMeModal.parentElement.removeChild($contactMeModal);
+				removeStyles();
+			})
+		})
+	}
+
+	$contactMeBtn.addEventListener('click', function(){
+		addStyles();
+		document.getElementById('modalCss').addEventListener('load', () => {
+			$contactMeModal.show();
+		})
+	})
+</script>

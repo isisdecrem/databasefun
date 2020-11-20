@@ -1,0 +1,36 @@
+#thankyou {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content: space-around;
+	box-sizing:border-box;
+	width:960px;
+	margin: 100px auto 0 auto;
+	min-height:600px;
+	text-align:center;
+}
+
+#thankyou > h1 {
+	color:#0067F4;
+	font-size:48px;
+}
+
+#thankyou > div {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content: space-around;
+	height: 200px;
+	font-size:20px;
+}
+
+#thankyou > button {
+	width:400px;
+	background-color:#0067F4;
+	color:white;
+	border:none;
+	font-size:20px;
+	border-radius:4px;
+	padding:10px 0;
+	cursor:pointer;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body > div {
+				display:table;
+				margin:25px;
+				border:solid 1px lightgrey;
+			}
+			
+			body > div > div {
+				display:table-row;
+			}
+			
+			body > div > div > * {
+				display:table-cell;
+				padding:10px;
+			}
+			
+			textarea {
+				width: 80vw;
+				height:50vh;
+				background-color:#232323;
+				color: #efefef;
+				border: none;
+			}
+			
+			input {
+				width:300px;
+			}
+		</style>
+		<script>
+			async function importEmails() {
+				const response = await fetch('/migrate/import'
+						, { method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({})}
+					)
+					, resp = await response.json()
+				;
+				console.log(resp);
+			}
+			
+			async function viewEmails() {
+				const response = await fetch('/migrate/view'
+						, { method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({})}
+					)
+					, resp = await response.json()
+				;
+				document.querySelector('textarea').value = resp.map(r => r.email).join('\n');
+				
+				//Array.from(new Set(resp.map(r => r.email.split('@')[1]))).sort().join('\n')
+				
+				//JSON.stringify(resp, null, 2);
+			}
+			
+			async function notifyEveryone() {
+				const subject = document.querySelector('#subject').value
+					, template = document.querySelector('#template').value
+				;
+				
+				if(!subject) return alert('Please enter a subject');
+				if(!template) return alert('Please enter a template');
+				
+				const response = await fetch('/migrate/notify'
+						, { method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({subject, template})}
+					)
+					, resp = await response.json()
+				;
+				console.log(resp);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Wisen Notifier</h1>
+		<div>
+			<div>
+				<button onclick='importEmails()'>Import Emails</button>
+				<button onclick='viewEmails()'>View Emails</button>
+			</div>
+			<div>
+				<textarea></textarea>
+			</div>
+		</div>
+		<div>
+			<div><label>Subject</label><input id='subject' type='text' value='Downloading your Wisen Space creations'></div>
+			<div><label>Template</label><input id='template' type='text' value='emails/wisenshutdown.email'></div>
+			<div><button onclick='notifyEveryone()'>Send Notification</button></div>
+		</div>
+		
+		
+	</body>
+</html>

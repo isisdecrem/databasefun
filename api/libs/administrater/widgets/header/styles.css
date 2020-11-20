@@ -1,0 +1,149 @@
+header {
+	background-color: var(--color-primary);
+	display: flex;
+	flex-flow: row nowrap;
+	width:100%;
+	color: var(--text-white-high);
+}
+
+header > div {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 1fr 64px;
+}
+
+header div > h5 {
+	color: var(--text-white-high);
+	padding:  12px;
+	font-weight: 400;
+	text-align: center;
+	align-self: center;
+}
+
+.button-help {
+	align-self: center;
+}
+
+.button-help i {
+	height: 32px;
+	vertical-align: middle;
+}
+
+.button-help-submenus-background {
+	opacity: 0;
+	display: none;
+	height: 100vh;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 1;
+}
+
+.button-help-submenus {
+	display: none;
+	background-color: #fff;
+	color: var(--text-dark-high);
+	z-index: 99;
+	position: absolute;
+	top: 36px;
+	right: 12px;
+	padding: 12px 0;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	white-space: nowrap;
+}
+.button-help-submenu {
+	line-height: 40px;
+	cursor: pointer;
+	text-transform: capitalize;
+	padding: 4px 16px;
+}
+
+.button-help-submenu a
+, .button-helpsubmenu a:visited {
+	color: var(--text-dark-high);
+}
+
+.button-help-submenus li:hover {
+	background-color: var(--color-gray-10);
+}
+.button-help-submenu i {
+	margin-right: 16px;
+	vertical-align: middle;
+}
+.button-help-submenus hr {
+	border: 0.5px solid var(--color-gray-10);
+	margin: 0 16px;
+}
+#contactSupportModal i {
+	width: 25px;
+	height: 25px;
+	margin-right: 8px;
+}
+#contactSupportModal .container > div {
+	margin-bottom: 24px;
+}
+#contactSupportModal a
+, #contactSupportModal a:visited {
+	color: var(--text-dark-high);
+	text-decoration: underline;
+	cursor: pointer;
+}
+#contactSupportModal select {
+	padding-right: 16px;
+}
+#contactSupportModal textarea {
+	font-family: 'Poppins', sans-serif;
+}
+#contactSupportModal .upload-file {
+	width: 100%;
+	position: relative;
+	border: 2px dotted var(--text-dark-medium);
+	border-radius: 5px;
+	padding: 16px 24px;
+}
+#contactSupportModal .question-text {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.5;
+	margin-bottom: 8px;
+}
+#contactSupportModal .additional-text {
+	font-size: 12px;
+}
+#contactSupportModal .files-to-upload {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+#contactSupportModal .files-to-upload .file {
+	width: 50%;
+	display: flex;
+	font-size: 12px;
+	padding: 4px 4px 4px 16px;
+}
+#contactSupportModal .files-to-upload .file:hover {
+	background-color: var(--color-gray-100);
+	border-radius: 5px;
+	cursor: pointer;
+}
+#contactSupportModal .files-to-upload .file .file-name {
+	width: 50%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#contactSupportModal .files-to-upload .file .file-size {
+	width: 40%;
+	padding-left: 8px;
+}
+#contactSupportModal .files-to-upload .file i {
+	height: 100%;
+	width: 12px;
+	margin-right: 0;
+}

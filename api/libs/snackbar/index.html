@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/libs/administrater/css/qoom.css">
+		<title>Snackbar | Qoom UI Component</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			section {
+				max-width: 720px;
+				margin: 64px auto;
+			}
+			@media (max-width: 577px) {
+				section {
+					margin: 40px auto;
+					padding: 0 16px;
+				}
+			}
+			h2 {
+				margin: 40px 0;
+			}
+			h5 {
+				margin: 80px 0 24px;
+				text-decoration: underline;
+			}
+			p {
+				font-weight: 300;
+				line-height: 1.5;
+			}
+			ul {
+				margin: 16px 0;
+			}
+			ul li {
+				list-style-type: square;
+				list-style-position: inside;
+			}
+			.content > div {
+				margin-bottom: 24px;
+			}
+			.content > p {
+				margin-bottom: 8px;
+			}
+			.snackbar {
+				position: static;
+				transform: translateX(0%);
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<h2>Snackbar</h2>
+			<p>Snackbars provide brief messages about a process that an site has performed or will perform.
+			They appear temporarily at the bottom or the top of the screen. They shouldn’t interrupt and they don’t require user input to disappear.
+			<br>Only one snackbar may be displayed at a time.</p>
+		</section>
+		<section class="content">
+			<h5>Layout</h5>
+			<div class="snackbar">
+				<div class="message">Message disappears automatically</div>
+			</div>
+			<div class="snackbar">
+				<div class="message">Message with one action</div>
+				<div class="action">ACTION</div>
+			</div>
+			<div class="snackbar">
+				<div class="message">Message with two actions</div>
+				<div class="action">ACTION 1</div>
+				<div class="action">ACTION 2</div>
+			</div>
+			<div class="snackbar">
+				<div class="message">Long long long long very long long long long very very long long long long loooooooooooong message</div>
+				<div class="action">ACTION</div>
+			</div>
+			<h5>Color</h5>
+			<p>Default background color is black (--text-dark-high)</p>
+			<div class="snackbar">
+				<div class="message">Simple message</div>
+				<div class="action">ACTION</div>
+			</div>
+			<p>For alert message, background color is red (--color-red)</p>
+			<div class="snackbar red position-top">
+				<div class="message">Your account will be deleted.</div>
+				<div class="action">ACTION</div>
+			</div>
+			<h5>Behaviour</h5>
+			<p>Default time-out is 5000 milliseconds (5 seconds)</p>
+			<p>Detault position is the top, center of the screen.</p>
+			<h5>Examples</h5>
+			<p>After confirming to delete a subdomain in Coding Spaces under My Account, a user will see the snackbar when the delete action has been performed.</p>
+			<div class="snackbar">
+				<div class="message">Coding space deleted</div>
+			</div>
+			<p>After requesting to delete Qoom account, a user will see the alert snackbar until Qoom team deletes the account.</p>
+			<div class="snackbar red">
+				<div class="message">You've requested to delete your account.</div>
+				<div class="action">Cancel My Request</div>
+			</div>
+			<p>If a user selects the button "Cancel My Request"</p>
+			<div class="snackbar blue">
+				<div class="message">👍Glad to hear you've changed your mind! We will NOT delete your account.</div>
+			</div>
+			<p>After confirming to delete a file in Explorer, a user will see the snackbar when the delete action has been performed.</p>
+			<div class="snackbar">
+				<div class="message">File deleted</div>
+			</div>
+			<p>After sending an invitation to collaborate on a file in Explorer, a user will see the snackbar.</p>
+			<div class="snackbar">
+				<div class="message">Invitation sent</div>
+			</div>
+			
+		</section>
+	</body>
+</html>

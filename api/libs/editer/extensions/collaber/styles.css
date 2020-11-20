@@ -1,0 +1,34 @@
+.ace-multi-cursor {
+	position: absolute;
+}
+
+.ace-multi-cursor-tooltip {
+	position: absolute;
+	padding: 1px 8px;
+	border-radius: 2px;
+	color: #fff;
+}
+
+.ace-multi-selection {
+	position: absolute;
+}
+
+.collabShareIndicator {
+	top: 5px;
+	bottom: unset;
+	cursor:pointer;
+}
+
+.collabright {
+	right: 24px;
+}
+
+.collableft{
+	right: 107px;
+}
+
+.collabAddNameIndicator {
+	top: 5px;
+	bottom: unset;
+	cursor: pointer;
+}

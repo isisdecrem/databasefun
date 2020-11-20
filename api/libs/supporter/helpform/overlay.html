@@ -1,0 +1,60 @@
+<div id="help-form-overlay-window">
+	<div class="modal-background"></div>
+    <link rel="stylesheet" href="/libs/lander/css/qoom.css" />
+    <link rel="stylesheet" href="/libs/supporter/helpform/overlay.css" />
+    <div class="modal">
+        <div class="modal-title">
+            <h1>How Can We Help</h1>
+        </div>
+        <div class="modal-content help-form-overlay-main-view form-input">
+        	<div class="help-form-overlay-stars-rating-container">
+        		<label>How would you rate your experiance with qoom?</label>
+        		<div class="help-form-overlay-stars-container"></div>
+        	</div>
+        	<div class="help-form-overlay-select-catagory-container">
+        		<label>Select a Catagory*</label>
+        		<div class="input-items">
+	        		<select class="help-form-overlay-select-catagory-selector" required>
+	        			<option value="" class="help-form-overlay-select-catagory-default-selection" disabled selected>
+	        				Select a category
+        				</option>
+				    	<option value="bug">Report a bug</option>
+				    	<option value="question">Questions</option>
+				    	<option value="feature">Feature request</option>
+				    	<option value="feedback">Feedbank and ideas</option>
+				    	<option value="other">Other</option>
+					</select>
+				</div>
+        	</div>
+        	<br />
+        	<div class="help-form-overlay-experience-container">
+        		<label>Tell us about your experience*</label>
+        		<div class="input-items">
+        			<textarea required class="help-form-overlay-experience-input"></textarea>
+        		</div>
+        	</div>
+        	<br />
+        	<div class="help-form-overlay-file-upload-container">
+        		<div class="help-form-overlay-file-upload-box">
+        			<p class="help-form-overlay-file-upload-title">
+        				Drag and drop to upload or <span class="help-form-overlay-file-upload-file-select-button">choose files</span>
+    				</p>
+        			<p class="help-form-overlay-file-upload-subtitle">
+        				Add images/videos to help us understand [Maximum file size: 20MB]
+    				</p>
+        		</div>
+        		<div class="help-form-overlay-file-upload-status-container"></div>
+        	</div>
+        	<br />
+        	<div class="help-form-overlay-action-buttons-container buttons-container">
+                <button class="qoom-button-outline qoom-button-small help-form-overlay-cancel-button" >
+                    Cancel
+                </button>
+            	<button class="qoom-button-outline qoom-button-small help-form-overlay-submit-button" >
+                    Submit
+                </button>
+        	</div>
+        	<input class="help-form-overlay-file-upload-input" type="file" multiple accept="*">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+:root {
+  --git-integration-inputs-display: flex;
+  --git-integration-outputs-display: none;
+}
+
+
+/*.input-items {*/
+/*	width: 100%;*/
+/*	flex: 1;*/
+/*}*/
+
+.git-integration-inputs {
+	display: var(--git-integration-inputs-display);
+}
+
+.git-integration-output-buttons {
+	display: var(--git-integration-outputs-display);
+}
+
+.git-integration-input-buttons {
+	display: var(--git-integration-inputs-display);
+}
+
+.git-integration-outputs-container {
+	display: var(--git-integration-outputs-display);
+	width: 100%;
+	height: 200px;
+	background: black;
+	color: white;
+	border-radius: 8px;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 0 !important;
+}
+
+.git-integration-outputs {
+	display: var(--git-integration-outputs-display);
+	border: 0;
+	padding-bottom: 0 !important;
+	width: 90%;
+	height: 85%;
+	background: inherit;
+	color: inherit;
+	resize: none;
+}
+
+#gitIntegrationOverlayWindow input {
+	width:80%;
+}

@@ -1,0 +1,14 @@
+<ul class="links-container"></ul>
+
+<script>
+	var links = {{links}};
+	var $linksContainer = document.querySelector('.links-container');
+	var linkIndex = 1;
+	links.forEach(link => {
+		$linksContainer.innerHTML += `<li><a id="link${linkIndex}" class="profile-link" href="${links[linkIndex - 1]}" target="_blank">${links[linkIndex - 1]}</a></li>`;
+		linkIndex ++;
+	});
+	if(links.length === 0) {
+		$linksContainer.innerHTML += ``
+	}
+</script>

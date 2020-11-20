@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Settings | Qoom</title>
+		<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css">
+		<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+		<style>
+			{{NORMALIZECSS}}
+			{{BASECSS}}
+			{{STYLES}}
+		</style>
+		<link rel="stylesheet" type="text/css" href="/libs/register/css/settings.css">
+	</head>
+	<body>
+		<header>
+			{{MENU}}
+			{{HEADER}}
+		</header>
+		<main class="settings-page-container">
+			<section class="settings-main-container account">
+				<div class="settings-title-container">
+					<h4 class="settings-title">Coding Space</h4>
+				</div>
+				<div class="settings-content-box">
+					<div class="settings-content">
+						<div class="control-account-container">
+							<div>
+								<p>User Name</p>
+								<p id="">{{subdomain}}</p>
+								<!--<p class="control-text"><a id="subdomainChangeBtn">Change</a></p>-->
+							</div>
+							<div>
+								<p>Qoom URL</p>
+								<p id="accountUserName">{{accountUserDomain}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="settings-main-container public-profile">
+				<div class="settings-title-container">
+					<h4 class="settings-title">Public Profile</h4>
+				</div>
+				<div class="settings-content-box">
+					<div class="settings-content">
+						<div class="first-row">
+							<div class="left-container">
+								<div class="profile-picture-container">
+									<img class="pf-picture profile-picture" src="{{avatar}}">
+									<div class="pf-picture change-profile-picture"><p><i class="ic-add-circle"></i><br>Change Image</p></div>
+									<div class="pf-picture upload-profile-picture"><p><i class="ic-add-circle"></i><br>Upload Image</p></div>
+									<p id="removeImage" class="control-text">Remove</p>
+								</div>
+							</div>
+							<div class="right-container">
+								<div class="form-input">
+								
+									<div class="input-items">
+										<p>Nickname</p>
+										<input id="nickname" type="text" value="{{nickname}}" disabled="true">
+									</div>
+									<div class="input-items">
+										<p>About Yourself</p>
+										<textarea id="about" type="text" value="" disabled="true">{{about}}</textarea>
+									</div>
+									<div class="input-items">
+										<p>Links <span class="extra-text">( Social Media, Github, Discord, etc. )</span></p>
+										<div class="links-container"></div>
+										<p><a id="addMoreLink" class="control-text">Add More</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="second-row">
+							<div class="left-container">
+								<div class="toggle-container">
+									<span class="control-text">Show <a href="/profile" target="_blank">my profile page</a> in public</span>
+									<input id="toggleSwitch" type="checkbox" class="toggle-switch" name ='toggleSwitch'>
+								</div>
+							</div>
+							<div class="right-container">
+								<div class="settings-button-container">
+									<button id="pfEdit" class="qoom-main-btn qoom-button-full qoom-button-small">Edit</button>
+									<button id="pfCancel" class="qoom-main-btn qoom-button-outline qoom-button-small">Cancel</button>
+									<button id="pfSave" class="qoom-main-btn qoom-button-full qoom-button-small" disabled>Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			{{qoomPlanHTML}}
+			<!--<section class="settings-main-container change-password">-->
+			<!--	<div class="settings-title-container">-->
+			<!--		<h4 class="settings-title">Change Password</h4>-->
+			<!--	</div>-->
+			<!--	<div class="settings-content-box">-->
+			<!--		<div class="settings-content">-->
+			<!--			<div class="form-input">-->
+			<!--				<p>Current Password</p>-->
+			<!--				<div class="input-items default">-->
+			<!--					<input id="currentPassword" type="password" class="">-->
+			<!--				</div>-->
+			<!--				<p>New Password</p>-->
+			<!--				<div class="input-items default">-->
+			<!--					<input id="newPassword" type="password" class="">-->
+			<!--				</div>-->
+			<!--				<div class="settings-button-container">-->
+			<!--					<button id="updatePwBtn" class="qoom-main-btn qoom-button-full qoom-button-small">Change</button>-->
+			<!--				</div>-->
+			<!--			</div>-->
+			<!--			<div class="settings-forgot-password-text">-->
+			<!--				<span>Forgot the current password? <span class="control-text"><a href="/admin/forgotpassword">Send Reset Password Email</a></span></span>-->
+			<!--			</div>-->
+			<!--		</div>-->
+			<!--	</div>-->
+			<!--</section>-->
+			<section class="settings-main-container backup">
+				<div class="settings-title-container">
+					<h4 class="settings-title">Backup</h4>
+				</div>
+				<div class="settings-content-box">
+					<div class="settings-content">
+						<table>
+							<tbody>
+								<tr>
+									<td>Download all of your files to your computer</td>
+									<td></td>
+									<td><button id="backupBtn" class="qoom-main-btn qoom-button-full qoom-button-small">Download ZIP</button></td>
+								</tr>
+								{{GITDOWNLOAD}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+			<!--<section class="settings-main-container">-->
+			<!--	<div class="settings-title-container delete-account">-->
+			<!--		<h4 class="settings-title">Delete Account</h4>-->
+			<!--	</div>-->
+			<!--	<div class="settings-content-box">-->
+			<!--		<div class="settings-content delete-account">-->
+			<!--			<table>-->
+			<!--				<tbody>-->
+			<!--					<tr>-->
+			<!--						<td>Once you delete your account, there is no going back.</td>-->
+			<!--						<td></td>-->
+			<!--						<td><button class="qoom-main-btn qoom-button-full qoom-button-small">Delete</button></td>-->
+			<!--					</tr>-->
+			<!--				</tbody>-->
+			<!--			</table>-->
+			<!--		</div>-->
+			<!--	</div>-->
+			<!--</section>-->
+		</main>
+		<footer>{{FOOTER}}</footer>
+		<script>
+			{{BASEJS}}
+			{{SCRIPT}}
+			let links = {{links}};
+			let isPublic = {{isPublic}};
+			let isSalty = {{isSalty}};
+			let profile = {
+				avatar : `{{avatar}}`
+				, nickname: '{{nickname}}'
+				, 'profile.about' : `{{about}}`
+				, 'profile.links': {{links}}
+			};
+			let userNameEditable = {{userNameEditable}}
+		</script>
+		{{PUSHTOGIT}}
+		<script type="module" src="/libs/register/js/settings.js"></script>
+	</body>
+</html>

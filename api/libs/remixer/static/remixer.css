@@ -1,0 +1,20 @@
+.remixer-overlay {
+	z-index: 9999;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+}
+
+.remixer-modal {
+	position: fixed !important;
+	left: 50vw !important;
+	top: 50vh !important;
+	transform: translate(-50%, -50%) !important;
+}
+
+.remixer-app-name {
+	color: var(--color-primary) !important;
+	text-decoration: underline;
+}

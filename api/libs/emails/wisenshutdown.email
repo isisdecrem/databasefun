@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body style='background-color:#efefef; font-family:sans-serif;'>
+		<div style='background-color:white; max-width:720px;margin:auto;padding:20px;'>
+			<h3>Hello {{NAME}}:</h3>
+			<p style='line-height:1.2em; font-size:18px;color:#232323;'>
+				You are getting this email since you or one of your children has attended a Wisen Space
+				camp or class in that past. Wisen Space has partnered with Makaboom and formed a non-profit organization called the <a href='https://www.applied-computing.org/'>Applied Computing Foundation</a> (ACF). ACF is a Not for Profit STEM organization with 501 (c) (3) certification. ACF's primary focus and distinction is integration of coding with real life examples. Because of this change, it was decided that it would be best to close Wisen Space's coding environment. The environment (ex: https://yoonjung.wisen.space) will be available until <b>May 31st, 2020</b>.
+
+			</p>
+			<p style='line-height:1.2em; font-size:18px;color:#232323;'>
+				If you would like to save your coding creations we have put together a <a href='https://migrate.qoom.io/'>web app</a> that you can use to download those creations into a zip file. We also have spun off the coding environment into a subscription based service called <a href='https://www.qoom.io/'>Qoom.io</a>. If you would like to continue to use your coding environment please sign up for an account and use this <a href='https://migrate.qoom.io/'>web app</a> to move your code over.
+			</p>
+			<p style='line-height:1.2em; font-size:18px;color:#232323;'> The Applied Computing Foundation is offering a series of coding classes and camps that build off of what you or your student did at Wisen Space. If interested please checkout ACF's amazing 2020 summer camps and classes <a href='https://www.applied-computing.org/'>here</a>.</p>
+			
+			<div style='line-height:1.2em; font-size:18px;color:#232323;'>Best Regards,</div>
+			<h3 style='margin:1rem 0.25rem 0.25rem 0;'>Jared Lera</h3>
+			<h4 style='margin:0.25rem; font-style:italic;color:#464646;'>Wisen Space Co-Founder and Instructor</h4>
+		</div>
+	</body>
+</html>

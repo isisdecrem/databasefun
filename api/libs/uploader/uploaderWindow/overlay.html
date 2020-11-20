@@ -1,0 +1,40 @@
+<div id="uploaderOverlayWindow">
+	<div class="modal-background"></div>
+    <link rel="stylesheet" href="/libs/administrater/css/qoom.css" />
+    <link rel="stylesheet" href="/libs/uploader/uploaderWindow/overlay.css" />
+    <div class="modal">
+        <div class="modal-title">
+            <h1>Upload</h1>
+        </div>
+        <div class="container">
+            <div class="modal-description">
+                <p>Upload your files/folders here.</p>
+            </div>
+            <div class="dropBoxField modal-description">
+            	<p>Drag and Drop</p>
+            </div>
+            <div class="buttons-container">
+                <button
+                    class="qoom-main-btn qoom-button-outline qoom-button-small uploadFilesBtn"
+                >
+                    Upload Files
+                </button>
+                <button
+                    class="qoom-main-btn qoom-button-outline qoom-button-small uploadFoldersBtn"
+                >
+                    Upload Folders
+                </button>
+            </div>
+            
+            <div class="buttons-container">
+                <button
+                    class="qoom-main-btn qoom-button-outline qoom-button-small uploadDoneBtn"
+                >
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+    <input type="file" class="uploaderUploadFileInput" multiple accept="*">
+    <input type="file" class="uploaderUploadFolderInput" webkitdirectory directory multiple accept="*">
+</div>

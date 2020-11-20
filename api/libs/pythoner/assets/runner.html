@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Python Runner</title>
+		<style>
+			body {
+				background: #232323;
+				margin: 0;
+				width: 100vw;
+				height: 100vh;
+				overflow:hidden;
+			}
+			#editor { 
+				display:none;
+			}			
+			#console {
+				width: 100vw;
+				height: 100vh;
+				margin: 0;
+				color: #f7b940;
+				background: #232323;
+				font-size: 18px;
+				padding:0.5em;
+				position:absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				border:none;
+				z-index: 1;
+			}
+			
+			button {
+				position:absolute;
+				top: 2vh;
+				right: 2vw;
+				z-index: 100;
+			}
+
+		</style>
+
+
+    	<script type="text/javascript" src="/libs/pythoner/assets/brython.js"></script>
+    	<script type="text/javascript" src="/libs/pythoner/assets/brython_stdlib.js"></script>
+
+		<script type="text/python3" id="tests_editor">
+			from browser import document as doc, window
+			from browser import html
+			
+			import editor
+			
+			doc['run'].bind('click',lambda *args: editor.run())
+
+		</script>
+	
+	</head>
+	<body onload='brython()'>
+	
+		
+		<button id="run"> ▶ Run</button>
+		<textarea id="editor" style="width:100%;">
+{{CODE}}
+		</textarea>
+		<textarea id="console" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+	
+	</body>
+</html>

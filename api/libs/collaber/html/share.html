@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#share {
+				font-family: helvetica;
+				position: absolute;
+				left: 25%;
+				width: 50%;
+			}
+			
+			#shareText {
+				text-align: center;
+			}
+			
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				float: left;
+				margin: 0 0 2em;
+			}
+			
+			thead {
+				border-bottom: 3px solid #6871f1;
+			}
+			
+			th {
+				padding: 0.35em 0 .35em;
+	    		font-weight: 400;
+				text-align: left;
+				font-size: 1.25em;
+			}
+			
+			tbody {
+				border-bottom: 3px solid #6871f1;
+			}
+			
+			tr {
+				border-bottom: 2px solid #ddd;
+			}
+			
+			td {
+				padding: .75em 0;
+			}
+			
+			input[type=text] {
+				width: 100%;
+				padding: 12px 20px;
+				margin: 8px 0;
+				display: inline-block;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+			}
+			
+			#submit {
+				width: 20%;
+				padding: 12px 0px;
+				display: inline-block;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+			}
+			
+			#submit:hover {
+				
+			}
+			
+			.right {
+				text-align: right;
+			}
+		</style>
+		<script src='/libs/restfull.js'></script>
+	</head>
+	<body>
+		<div id="share">
+			<div id="shareText">
+				<h2>
+					Share to Edit
+				</h2>
+			</div>
+			<br>
+			<p>File</p>
+			<p id="file-name"></p>
+			<table>
+				<thead>
+					<tr>
+						<th>Collaborators</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+				</tbody>
+			</table>
+			
+			<label for="shareTo">Invite<br>For multiple people, enter a comma (,) between invitees.</label>
+			<input type="text" name="shareTo" id="collaber" placeholder="Enter email or urls">
+			<button id="submit">Submit</button>
+		</div>
+		
+		<script>
+			function getParameterByName(name, url) {
+			    if (!url) url = window.location.href;
+			    name = name.replace(/[\[\]]/g, '\\||DATA||amp;');
+			    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+			        results = regex.exec(url);
+			    if (!results) return null;
+			    if (!results[2]) return '';
+			    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+			}
+		
+			var fileName = getParameterByName("file", location.href);
+		
+			document.getElementById("file-name").innerHTML = fileName;
+		
+			var submit = document.getElementById("submit");
+			
+			submit.addEventListener('click', addCollaber);
+			
+			document.addEventListener('keypress', e => {
+				if (e.which == 13) {
+					addCollaber();
+				}
+			})
+			
+			function addCollaber() {
+				const user = document.getElementById('collaber').value.trim();
+				document.getElementById('collaber').value = "";
+				if (user != '') {
+					restfull.post({
+						path: '/collab/share'
+						, data: {
+							file: fileName
+							, collaber: user
+							, date: new Date()
+						}
+					}, (err, resp) => {
+						console.log(err || resp);
+						getCollabers()
+					})
+				}
+			}
+			
+			function getCollabers() {
+				restfull.post({
+					path: '/collab/shared'
+					, data: {
+						file: fileName
+					}
+				}, (err, resp) => {
+					console.log(err || "");
+					let requests = JSON.parse(resp)
+					console.log(requests)
+					showCollabers(requests)
+				})
+			}
+			
+			function showCollabers(collabers) {
+				document.getElementById('tbody').innerHTML = ''
+				
+				collabers.forEach(person => {
+					var table = document.getElementById("tbody");
+	
+					var row = table.insertRow(0);
+					
+					// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					
+					// Add some text to the new cells:
+					cell1.innerHTML = person.collaber.person.ship.name;
+					cell2.innerHTML = `<button collaber="${person.collaber.person.ship.name}" class="remove">REMOVE</button>`;
+					
+					cell2.setAttribute('class', 'right')
+				})
+				
+				Array.from(document.getElementsByClassName("remove")).forEach(e => {
+					e.addEventListener('click', function() {
+						restfull.del({
+							path: '/collab/shared',
+							data: {
+								file: fileName
+								, collaber: e.getAttribute('collaber')
+							}
+						}, (err, resp) => {
+							console.log(err || resp)
+							getCollabers()
+						})
+					})
+				})
+			}
+			
+			getCollabers()
+		</script>
+	</body>
+</html>

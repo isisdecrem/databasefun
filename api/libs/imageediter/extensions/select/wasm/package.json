@@ -1,0 +1,15 @@
+{
+  "name": "image-select",
+  "collaborators": [
+    "illemonati <tonymiaotong@tioft.tech>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "image_select_bg.wasm",
+    "image_select.js",
+    "image_select.d.ts"
+  ],
+  "module": "image_select.js",
+  "types": "image_select.d.ts",
+  "sideEffects": false
+}

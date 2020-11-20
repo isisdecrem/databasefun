@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css">
+	<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+		<style>
+			input {
+			    font-family: 'Lato', sans-serif;
+			    font-size: 11pt;
+			    color: black;
+			    border-top: 1.5pt;
+			    border-left: 1.5pt;
+			    border-right: 1.5pt;
+			    border-color: #A5A5AF;
+			    align-items: center;
+			    width: 400px;
+			    height: 30px;
+			}
+			
+			button {
+			    border: 4px solid #E06967;
+			    padding: 10px 20px;
+			    border-radius: 50px;
+			    letter-spacing: 0.06em;
+			    text-transform: uppercase;
+			    text-decoration: none;
+			    outline: none;
+			    background: #fff;
+			    color: #E06967;
+			    font-size: 15px;
+			}
+			
+			button:hover {
+			    background: #DA433E;
+			    color: #fff;
+			    border: 4px solid #DA433E;
+			    border-radius: 50px;
+			}
+			
+			button {
+			  -webkit-transition: all 0.2s linear;
+			  -moz-transition: all 0.2s linear;
+			  -o-transition: all 0.2s linear;
+			  transition: all 0.2s linear;
+			}
+		</style>
+	</head>
+	<body>
+		<input id='link' type='text' class='input' placeholder="Paste youtube link..."/>
+		<br>
+		<br>
+		<input id='vidname' type='text' class='input' placeholder="Video name..."/>
+		<br>
+		<br>
+		<button id="submit">enter</button>
+
+		<script type='module'>
+			
+			import Modal from '/libs/modal/script.js';
+			
+			var $submit = document.querySelector('button');
+			var link = document.getElementById('link')
+			var vidname = document.getElementById('vidname')
+			
+			$submit.addEventListener('click', () => {
+				const testModal = new Modal({
+					modalContainerId: 'testModalId'
+					, modalTitleText: `TEST TITLE`
+					, modalContentsInnerHTML: `<input><h1>HEELO</h1>`
+					, modalSubmitBtnText: 'SUBMIT OK'
+					, modalSubmitBtnAction: function(){
+						alert("OK")
+					}
+					, modalCancelBtnText: 'Cancel'
+					, modalCancelBtnAction: function(){
+						testModal.destroy();
+					}
+				})
+		
+				testModal.show();
+			})
+			
+			
+		//	$submit.addEventListener('click', sendLink)
+			
+			function sendLink() {
+				fetch("/youtubeDownloader?link=" + encodeURIComponent(link.value) + "&vidname=" + encodeURIComponent(vidname.value))
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+<div id="gitIntegrationOverlayWindow">
+	<div class="modal-background"></div>
+    <link rel="stylesheet" href="/libs/administrater/css/qoom.css" />
+    <link rel="stylesheet" href="/libs/migrater/explorer-git-integration/overlay.css" />
+    <div class="modal">
+        <div class="modal-title">
+            <h1>Git Import</h1>
+        </div>
+        <div class="container" style='padding:1rem;'>
+            <div class="modal-description">
+                <h4>Import a Git Repository into a Folder</h4>
+            </div>
+        	<div class="git-integration-inputs">
+    		    <div class="form-input filepath" style='width:80%;'>
+    		    	<p>Enter a folder name to import the files to:</p>
+	            	<div
+		                class="input-items default empty"
+		            >
+		                <input
+		                    type="text"
+		                    class="git-integration-overlay-folder-name"
+		                    required
+		                />
+		        	</div>
+		        	<br />
+		        	<p>Enter the repo url:</p>
+		            <div
+		                class="input-items default empty"
+		            >
+		                <input
+		                    type="text"
+		                    class="git-integration-overlay-git-url"
+		                    pattern="(http[s]?:\/\/)([^\/\s]+\/)(.*)(.git$)"
+		                    required
+		                />
+		            </div>
+	            </div>
+        	</div>
+        	<div class="git-integration-outputs-container git-integration-out">
+				<textarea class="git-integration-outputs"></textarea>
+			</div>
+            
+            <div class="buttons-container">
+				<div class="git-integration-input-buttons">
+					<button
+					    class="qoom-main-btn qoom-button-outline qoom-button-small git-integration-cancel-button"
+					    type="cancel"
+					>
+					    Cancel
+					</button>
+					<button
+					    class="qoom-main-btn qoom-button-full qoom-button-small git-integration-overlay-submit-button"
+					    type="submit"
+					    disabled
+					>
+					    Import
+					</button>
+				</div>
+				<div class="git-integration-output-buttons">
+					<button
+					    class="qoom-main-btn qoom-button-outline qoom-button-small git-integration-close-button"
+					    type="close"
+					>
+					    Close
+					</button>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

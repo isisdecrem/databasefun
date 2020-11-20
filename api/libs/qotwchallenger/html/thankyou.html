@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>QOTW</title>
+	<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css">
+	<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+	<!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="/libs/administrater/assets/favicon.png" type="image/png">
+	<style>
+		{{BASECSS}}
+		{{STYLES}}
+		{{THANKYOUCSS}}
+	</style>
+</head> 
+<body>
+	<header>
+		{{MENU}}
+		{{HEADER}}
+	</header>
+	<main>
+		<div id='thankyou'>
+			<h1>Project Submitted Successfully</h1>
+			<div>
+				<div>
+					Thank you for participating in the Qoom of the Week Challenge.<br>
+					We will announce the winners on our website. The winners will be notified via email.
+				</div>
+				<div>
+					If you have any questions, contact us at 
+					<a href='mailto:hello@qoom.io'>hello @qoom.io</a>
+				</div>
+				<div>
+					Join <a href='https://discord.gg/4mTvzrY'>our Discord community</a> to get the latest news and meet like-minded people
+				</div>
+			</div>
+			<button>
+				See Next Challenges
+			</button>
+		</div>
+	</main>
+	<footer>{{FOOTER}}</footer>
+	<script>var stripeToken = '{{STRIPETOKEN}}';</script>
+	<script src='https://js.stripe.com/v3/'></script>
+	<script src="https://www.paypal.com/sdk/js?currency=USD&client-id=AZ5AICtVE_z4wMa-HpBV0PUDBgKINjjkdWmE5VcEBvzgGl1dLMB_zcXuMDm9smpxt-TYnbI0s2m6LQ0r" data-namespace='paypal_sdk'></script>
+	<script>
+		{{BASEJS}}
+		{{SCRIPT}}
+		{{THANKYOUJS}}		
+	</script>
+</body>
+</html>

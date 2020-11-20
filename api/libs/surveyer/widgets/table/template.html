@@ -1,0 +1,38 @@
+<div id="dataControls">
+  <select id='data-download'>
+  	<option selected value=''>Download</option>
+  	<option value='csv'>CSV</option>
+  	<option value='json'>JSON</option>
+  	<option value='html'>HTML</option>
+  	<option value='pdf'>PDF</option>
+  	<option value='xlsx'>XLSX</option>
+  </select>
+  <select id="filter-field"></select>
+
+  <select id="filter-type">
+  	<option value="like">like</option>
+    <option value="=">=</option>
+    <option value="<"><</option>
+    <option value="<="><=</option>
+    <option value=">">></option>
+    <option value=">=">>=</option>
+    <option value="!=">!=</option>
+  </select>
+
+  <input id="filter-value" type="text" placeholder="value to filter">
+  <div>
+  	<button id='filter-it'>Filter</button>
+  	<button id='filter-clear'>Clear</button>
+	<button id='dataAdd'>Add</button>
+  </div>
+</div>
+<div id="datatable">
+	<h1>Loading...</h1>
+</div>
+
+<script type='module'>
+	import('/libs/modal/script.js').then((module) => {
+		window.Modal = module.default;
+	});
+</script>
+<script src='/surveyer/widgets/table/sheet.js' defer></script>

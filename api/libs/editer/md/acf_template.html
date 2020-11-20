@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/libs/landing/css/util.css">
+		<link rel="stylesheet" type="text/css" href="/libs/landing/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/libs/landing/css/base.css">
+		<link rel="icon" type="image/png" href="/libs/landing/assets/icons/favicon.ico"/>
+		<link rel="stylesheet" type="text/css" href="/libs/landing/fonts/themify/themify-icons.css">
+		<link rel="stylesheet" type="text/css" href="/libs/landing/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<style>
+			{{MARKDOWNCSS}}
+		</style>
+	</head>
+	<body>
+		<header></header>
+		<main>{{MARKDOWNHTML}}</main>
+		<footer></footer>
+		<script>
+		
+			const $els = document.querySelectorAll('main > *')
+				, $main = document.querySelector('main')
+				, sections = []
+			;
+			
+			$els.forEach(($el, i) => {
+				const isHeader = ['H1', 'H2'].includes($el.tagName);
+				if(!sections.length || isHeader) {
+					const type = isHeader ? $el.tagName : 'H1';
+					sections.push({type, $el, children: []})
+					return;
+				}
+				const latestSection = sections[sections.length - 1];
+				latestSection.children.push($el);
+			})
+
+			$main.innerHTML = '';
+			sections.forEach(section => {
+				var $section = document.createElement('section');
+				$section.appendChild(section.$el);
+				
+				var $div = document.createElement('div');
+				section.children.forEach($child => $div.appendChild($child));
+				$section.appendChild($div);
+				
+				$section.className = section.type;
+				$main.appendChild($section);
+			})
+
+			//tec labels
+			var $tech4 = sections[0].children.find($el => $el.innerHTML.trim() === 'Technologies');
+			if($tech4) {
+				var $tecUl = $tech4.nextSibling;
+				if($tecUl && $tecUl.tagName === 'UL') {
+					$tecUl.className = "tec-list-ul";
+					var $tecList = $tecUl.children;
+					var colorList = ["blue-label", "yellow-label", "green-label", "purple-label", "pink-label"];
+					var listIndex = 0;
+					for(li of $tecList){
+						var recurIndex = listIndex % colorList.length;
+						li.className =`tec-label ${colorList[recurIndex]}`;
+						listIndex++;
+					}
+				}
+			}
+			
+			
+			//unit bar
+			
+			var $h1Section = document.querySelector('.H1');
+			var $ul = document.createElement('ul');
+			$ul.className = "breadcrumb";
+			$ul.setAttribute("id", "unit-bar");
+			$h1Section.appendChild($ul);
+			
+			var $h2Section = document.querySelectorAll('h2');
+			$h2Section.forEach(u => {
+				u.setAttribute("id", `${u.innerText.replace(/\W+/g, "_")}`);
+				
+				var $li = document.createElement('li');
+				var $a = document.createElement('a');
+				
+				$a.className ="unitbar-a";
+				$a.setAttribute("href", `#${u.innerText.replace(/\W+/g, "_")}`);
+				$a.innerHTML = u.innerText.substr(0, 6);
+				$li.className = "unitbar-li";
+				$li.appendChild($a);
+				$ul.appendChild($li);
+			});
+			
+			var $sectionH2 = document.querySelectorAll('.H2');
+			$sectionH2.forEach(s => {
+				var $div = document.createElement('div');
+				var $a = document.createElement('a');
+				
+				$div.innerHTML = "Go back to unit list";
+				$div.className = "goup-btn";
+				$a.setAttribute("href", "#unit-bar");
+				
+				$a.appendChild($div);
+				s.appendChild($a);
+			});
+
+			fetch('/acf/blog/footer')
+		 	  .then(function(response) {
+		 	    return response.text();
+		 	  })
+		 	  .then(function(footer) {
+		 	    document.body.innerHTML = document.body.innerHTML.replace('<footer></footer>', footer)
+		 	  });
+		 	  
+		 	fetch('/acf/blog/header')
+		 	  .then(function(response) {
+		 	    return response.text();
+		 	  })
+		 	  .then(function(header) {
+		 	    document.body.innerHTML = document.body.innerHTML.replace('<header></header>', header);
+		 		
+		 		// Show/hide sidebar 
+			    $('body').append('<div class="overlay-sidebar trans-0-4"></div>');
+			    var ovlSideBar = $('.overlay-sidebar');
+			    var btnShowSidebar = $('.btn-show-sidebar');
+			    var btnHideSidebar = $('.btn-hide-sidebar');
+			    var sidebar = $('.sidebar');
+			
+			    $(btnShowSidebar).on('click', function(){
+			        $(sidebar).addClass('show-sidebar');
+			        $(ovlSideBar).addClass('show-overlay-sidebar');
+			    })
+			
+			    $(btnHideSidebar).on('click', function(){
+			        $(sidebar).removeClass('show-sidebar');
+			        $(ovlSideBar).removeClass('show-overlay-sidebar');
+			    })
+			
+			    $(ovlSideBar).on('click', function(){
+			        $(sidebar).removeClass('show-sidebar');
+			        $(ovlSideBar).removeClass('show-overlay-sidebar');
+			    })
+		 	  });
+		</script>
+		<script type="text/javascript" src="/libs/landing/vendor/jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/libs/landing/vendor/animsition/js/animsition.min.js"></script>
+		<script type="text/javascript" src="/libs/landing/vendor/select2/select2.min.js"></script>
+		<script type="text/javascript" src="/libs/landing/vendor/daterangepicker/moment.min.js"></script>
+		<script type="text/javascript" src="/libs/landing/vendor/daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="/libs/landing/vendor/slick/slick.min.js"></script>
+		<script type="text/javascript" src="/libs/landing/js/slick-custom.js"></script>
+		<script src="/libs/landing/js/main.js"></script>
+	<!--===============================================================================================-->
+		<script type="text/javascript" src="/libs/landing/vendor/parallax100/parallax100.js"></script>
+		<script type="text/javascript">
+	        $('.parallax100').parallax100();
+		</script>
+	<!--===============================================================================================-->
+		<script type="text/javascript" src="/libs/landing/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+		<script type="text/javascript" src="/libs/landing/vendor/lightbox2/js/lightbox.min.js"></script>
+		   
+    	<script src="/libs/landing/js/util.js"></script>
+	</body>
+</html>

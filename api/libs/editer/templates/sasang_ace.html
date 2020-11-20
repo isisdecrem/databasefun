@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>||TITLE||</title>
+	    <link rel="shortcut icon" href="/libs/administrater/assets/favicon.png" type="image/png">
+
+		<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css">
+		<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+	    <style type="text/css" media="screen">
+	    	body {
+	    		background-color:#141414;
+	    		scrollbar-color: #464646 #232323;
+				scrollbar-width: thin;
+	    	}
+		    a, span {
+		    	display: inline;
+		    }
+		    #editor {
+		        position: absolute;
+		        top: 0;
+		        right: 0;
+		        bottom: 0;
+		        left: 0;
+		    }
+		    .onRight .placeWithPreviewer {
+		    	right: calc(40% + 24px);
+		    }
+		    .onLeft .placeWithPreviewer {
+		    	right: 48px;
+		    }
+		    .onBottom .placeWithPreviewer {
+				right: 48px;
+				bottom: calc(40% + 24px);
+		    }
+		    
+		    {{COLLABCSS}}
+	    </style>
+	</head>
+	<body>
+	    <div id="editor">||DATA||</div>
+	    <script src="/apps/editer/src/ace.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="/libs/editer/ext-language_tools.js"></script>
+	    <script src='/libs/editer/ext-searchbox.js'></script>
+	    <script src='/libs/editer/ext-settings_menu.js'></script>
+	    <script type='module'>
+	    	import Modal from '/libs/modal/script.js'
+			import savingalert from '/libs/editer/extensions/savingalert.js';
+	    	import preview from '/libs/editer/extensions/previewer/script.js';
+	    	import notify from '/libs/notifier/script.js';
+	    	
+	        if(!!window.performance && window.performance.navigation.type === 2) {
+	            window.location.reload();
+	        }
+			const editorDiv = document.getElementById('editor')
+				, $container = document.getElementsByTagName("body")[0]
+			;
+			
+			let savedEvent = new Event('saved')
+				, savingEvent = new Event('saving')
+				, storedOptions = localStorage.getItem('aceOptions')
+				, isEditing = false
+				, savingTo
+			;
+			
+			window.editor = null;
+			window.isSaving = false;
+			window.savedResponse = null;
+			window.onclose = {};
+			window.lastSaveData = '';
+			window.renderFileTypes = ||renderFileTypes||;
+			window.isLoggedIn = ||ISLOGGEDIN||;
+			window.isSalty = ||ISSALTY||;
+		    window.hasPerson = ||HASPERSON||;
+		    window.dateUpdated = new Date('||DATEUPDATED||');
+		    window.language = '||LANGUAGE||';
+			
+			function initEditor() {
+				editor = ace.edit('editor');
+				editor.setTheme('ace/theme/gruvbox');
+				
+				const session = editor.getSession();
+				session.setMode('ace/mode/javascript');
+			    session.setOptions({ tabSize: 4, useSoftTabs: false, wrap: 'printMargin' });
+				editor.setFontSize(18);
+				
+			    try {
+			        if(storedOptions) {
+			            storedOptions = JSON.parse(storedOptions);
+			            delete storedOptions.mode;
+			            editor.setOptions(storedOptions);
+			        }
+			    } catch(ex) {
+			
+			    }
+			    session.setMode(`ace/mode/${language}`);
+				
+				lastSaveData = editor.getValue().trim();
+				
+				bindQoomCommands();
+				
+				editor.setOptions({
+			    	enableLiveAutocompletion: false
+				});  	
+				editor.setOption("showPrintMargin", false);
+				
+				preview();
+				savingalert();
+			
+				notify('{{NOTIFICATION}}');
+			}
+			
+		    function keyUpHandler(e) {
+		        if (isEditing) return;
+		        isEditing = true;
+		        setTimeout(function() {
+		            isEditing = false
+		        }, 2000);
+		        if (e.ctrlKey && e.keyCode === 83) return saveContents();
+		    }
+		
+		    function saveContents() {
+		    	if(!editor) return;
+		        var val = editor.getValue().trim();
+		        if (!isLoggedIn || isSaving || val === lastSaveData || isEditing) return;
+		        if (isLoggedIn && window.systemalert(val.length)) {
+		        	editor.setValue(lastSaveData);
+		        	editor.selection.clearSelection();
+		        	return;
+		        }
+		        isSaving = true;
+		        post(val, function() {
+		            lastSaveData = val;
+		            isSaving = false;
+		        });
+		        return false;
+		    }
+		
+		    function post(data, callback) {
+		        var req = new XMLHttpRequest();
+		        req.open("POST", "/save", true);
+		        req.setRequestHeader("content-type", "application/json")
+		        if(localStorage && localStorage.passcode) {
+		            req.setRequestHeader("secret", localStorage.passcode)
+		        }
+		        req.onreadystatechange = function() {
+		            if (req.readyState == 4) {
+		                if(req.status == 200) console.log("saved");
+		                savedResponse = req.status;
+		                document.dispatchEvent(savedEvent);
+		                callback();
+		            }
+		        }
+		        
+		        let errors = [];
+		        try {
+		        	errors = editor.getSession().getAnnotations().filter(a => a.type === 'error') || [];
+		        } catch(ex) {
+		        	
+		        }
+		        req.send(JSON.stringify({
+		            text: data, errors, timestamp: new Date()*1
+		        }));
+		        document.dispatchEvent(savingEvent);
+		    }
+		
+		    function saveSettings() {
+		    	if(!editor) return;
+		        localStorage.setItem('aceOptions', JSON.stringify(editor.getOptions()));
+		    }
+		    
+		    function checkBeforeClose() {
+		    	if(!editor) return;
+		    	if(!isLoggedIn) return;
+		    	for(let f in window.onclose) {
+		    		const prompt = window.onclose[f]();
+		    		if(prompt) return prompt;
+		    	}
+
+		    	const val = editor.getValue().trim();
+		        saveSettings();
+		        if (val === lastSaveData) return;
+		    	return 'Are you sure you want to exit?';
+		    }
+			
+			function bindQoomCommands() {
+				define("ace/commands/qoom_commands"
+		    		,["require","exports","module","ace/lib/lang","ace/config"], function(require, exports, module) {
+						"use strict";
+						
+						var lang = require("../lib/lang");
+						var config = require("../config");
+		
+						editor.commands.addCommand({
+						    name: "showSettingsMenuAnotherBrowser",
+						    bindKey: { 
+						        mac: "Command-m", 
+						        win: "Ctrl-m" 
+						    },
+						    exec: function(e) { config.loadModule("ace/ext/settings_menu", function(t){t.init(e), e.showSettingsMenu()})},
+						    isAvailable: function(editor) {
+						        return true;
+						    }
+					    	, readOnly: false
+						});				
+		
+		        });
+		        
+		        require("ace/commands/qoom_commands");				
+			}
+			
+			function preventCtrlS(e) {
+				if((e.metaKey || e.ctrlKey) && e.key === 's') {
+					e.preventDefault();
+					return false;
+				}
+			}
+			
+			{{COLLABJS}}
+
+			$container.onkeyup = keyUpHandler;
+			window.onbeforeunload = checkBeforeClose;
+			document.addEventListener('keydown', preventCtrlS);
+			
+		    setInterval(saveSettings, 2000);
+		    setInterval(saveContents, 1000);
+
+		    initEditor();
+	  
+	    </script>
+		||trial||
+		||systemalert||
+		{{COLLABHTML}}
+	</body>
+</html>

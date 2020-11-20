@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<p>*** Support Request ***</p>
+		<p>Domain: {{domain}}</p>
+		<p>Rating: {{stars}}</p>
+		<p>Category: {{category}}</p>
+		<p>Message:</p>
+		<p>{{tellusmore}}</p>
+	</body>
+</html>

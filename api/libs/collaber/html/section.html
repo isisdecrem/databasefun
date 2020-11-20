@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#share {
+				font-family: helvetica;
+				position: absolute;
+				left: 10%;
+				width: 80%;
+			}
+			
+			#shared-with-me {
+				font-family: helvetica;
+				position: 
+				left: 10%;
+				width: 80%;
+			}
+			
+			#head {
+				text-align: center;
+			}
+			
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				float: left;
+				margin: 0 0 2em;
+			}
+			
+			thead {
+				border-bottom: 3px solid #6871f1;
+			}
+			
+			th {
+				padding: 0.35em 0 .35em;
+	    		font-weight: 400;
+				text-align: left;
+				font-size: 1.25em;
+			}
+			
+			tbody {
+				border-bottom: 3px solid #6871f1;
+			}
+			
+			tr {
+				border-bottom: 2px solid #ddd;
+			}
+			
+			td {
+				padding: .75em 0;
+			}
+		</style>
+		<script src='/libs/restfull.js'></script>
+	</head>
+	<body>
+		<div id="share">
+			<div id="head">
+				<h2>
+					Collaber
+				</h2>
+			</div>
+			<p>
+				You have <span id="count">0</span> invitation(s) to collaborate
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>From</th>
+						<th>Received on</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="table-share">
+				</tbody>
+			</table>
+			<p>
+				SHARED FILES
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Kind</th>
+						<th>Last Modified</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="table-shared">
+				</tbody>
+			</table>
+		</div>
+		
+		<script>
+			function getInvites() {
+				restfull.get({
+					path: '/collab/share'
+				}, (err, resp) => {
+					let requests = JSON.parse(resp)
+					// console.log(requests)
+					fillInviteTable(requests)
+				})
+			}
+			
+			function fillInviteTable(requests) {
+				document.getElementById("table-share").innerHTML = '';
+				document.getElementById("count").innerText = requests.length
+				
+				requests.forEach(req => {
+					var table = document.getElementById("table-share");
+	
+					var row = table.insertRow(0);
+					
+					// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					
+					// Add some text to the new cells:
+					cell1.innerHTML = req.fileId.name;
+					cell2.innerHTML = req.owner.ship.name;
+					cell3.innerHTML = req.date.substring(0,10) + " " + req.date.substring(11,16);
+					cell4.innerHTML = `<button class="decline" fileId="${req.fileId._id}">DECLINE</button> <button class="accept" fileId="${req.fileId._id}">ACCEPT</button>`
+				})
+				
+				Array.from(document.getElementsByClassName("accept")).forEach(e => {
+					e.addEventListener('click', function() {
+						restfull.patch({
+							path: '/collab/share',
+							data: {
+								fileId: e.getAttribute('fileId')
+							}
+						}, (err, resp) => {
+							console.log(err || resp)
+							getInvites()
+							getAccepted()
+						})
+					})
+				})
+				
+				Array.from(document.getElementsByClassName("decline")).forEach(e => {
+					e.addEventListener('click', function() {
+						restfull.del({
+							path: '/collab/share',
+							data: {
+								fileId: e.getAttribute('fileId')
+							}
+						}, (err, resp) => {
+							console.log(err || resp)
+							getInvites()
+						})
+					})
+				})
+			}
+			
+			getInvites()
+			
+			function getAccepted() {
+				restfull.get({
+					path: '/collab/shared'
+				}, (err, resp) => {
+					console.log(err || resp);
+					let requests = JSON.parse(resp)
+					fillAcceptedTable(requests)
+				})
+			}
+			
+			function fillAcceptedTable(requests) {
+				document.getElementById("table-shared").innerHTML = '';
+				document.getElementById("count").innerText = requests.length
+				
+				requests.forEach(req => {
+					var table = document.getElementById("table-shared");
+	
+					var row = table.insertRow(0);
+					
+					// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					
+					console.log(req)
+					
+					// Add some text to the new cells:
+					cell1.innerHTML = req.fileId.name;
+					cell2.innerHTML = "";
+					cell3.innerHTML = "";
+					cell4.innerHTML = "";
+				})
+			}
+			
+			getAccepted()
+		</script>
+	</body>
+</html>

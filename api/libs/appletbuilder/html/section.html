@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link href="/libs/appletbuilder/css/section2.css" rel="stylesheet">
+		<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+		<style>
+	   	    .lbl {
+			  margin-left: 5px;
+			  vertical-align: middle;
+			  cursor: pointer;
+			}
+			.chromeExtension {
+			  position: relative;
+			  top: 1px;
+			  width: 17px;
+			  height: 17px;
+			  border: 1px solid #c8ccd4;
+			  border-radius: 3px;
+			  vertical-align: middle;
+			  transition: background 0.1s ease;
+			  cursor: pointer;
+			}
+			.chromeExtension:after {
+			  content: '';
+			  position: absolute;
+			  top: 1px;
+			  left: 5px;
+			  width: 5px;
+			  height: 11px;
+			  opacity: 0;
+			  transform: rotate(45deg) scale(0);
+			  border-right: 2px solid #fff;
+			  border-bottom: 2px solid #fff;
+			  transition: all 0.3s ease;
+			  transition-delay: 0.15s;
+			}
+			.loginScreen {
+			  position: relative;
+			  top: 1px;
+			  width: 17px;
+			  height: 17px;
+			  border: 1px solid #c8ccd4;
+			  border-radius: 3px;
+			  vertical-align: middle;
+			  transition: background 0.1s ease;
+			  cursor: pointer;
+			}
+			.loginScreen:after {
+			  content: '';
+			  position: absolute;
+			  top: 1px;
+			  left: 5px;
+			  width: 5px;
+			  height: 11px;
+			  opacity: 0;
+			  transform: rotate(45deg) scale(0);
+			  border-right: 2px solid #fff;
+			  border-bottom: 2px solid #fff;
+			  transition: all 0.3s ease;
+			  transition-delay: 0.15s;
+			}
+			.trainedModel {
+			  position: relative;
+			  top: 1px;
+			  width: 17px;
+			  height: 17px;
+			  border: 1px solid #c8ccd4;
+			  border-radius: 3px;
+			  vertical-align: middle;
+			  transition: background 0.1s ease;
+			  cursor: pointer;
+			}
+			.trainedModel:after {
+			  content: '';
+			  position: absolute;
+			  top: 1px;
+			  left: 5px;
+			  width: 5px;
+			  height: 11px;
+			  opacity: 0;
+			  transform: rotate(45deg) scale(0);
+			  border-right: 2px solid #fff;
+			  border-bottom: 2px solid #fff;
+			  transition: all 0.3s ease;
+			  transition-delay: 0.15s;
+			}
+			.database {
+			  position: relative;
+			  top: 1px;
+			  width: 17px;
+			  height: 17px;
+			  border: 1px solid #c8ccd4;
+			  border-radius: 3px;
+			  vertical-align: middle;
+			  transition: background 0.1s ease;
+			  cursor: pointer;
+			}
+			.database:after {
+			  content: '';
+			  position: absolute;
+			  top: 1px;
+			  left: 5px;
+			  width: 5px;
+			  height: 11px;
+			  opacity: 0;
+			  transform: rotate(45deg) scale(0);
+			  border-right: 2px solid #fff;
+			  border-bottom: 2px solid #fff;
+			  transition: all 0.3s ease;
+			  transition-delay: 0.15s;
+			}
+			.API {
+			  position: relative;
+			  top: 1px;
+			  width: 17px;
+			  height: 17px;
+			  border: 1px solid #c8ccd4;
+			  border-radius: 3px;
+			  vertical-align: middle;
+			  transition: background 0.1s ease;
+			  cursor: pointer;
+			}
+			.API:after {
+			  content: '';
+			  position: absolute;
+			  top: 1px;
+			  left: 5px;
+			  width: 5px;
+			  height: 11px;
+			  opacity: 0;
+			  transform: rotate(45deg) scale(0);
+			  border-right: 2px solid #fff;
+			  border-bottom: 2px solid #fff;
+			  transition: all 0.3s ease;
+			  transition-delay: 0.15s;
+			}
+			#chromeExtension:checked ~ .chromeExtension {
+			  border-color: transparent;
+			  background: #6871f1;
+			  animation: jelly 0.6s ease;
+			}
+			#chromeExtension:checked ~ .chromeExtension:after {
+			  opacity: 1;
+			  transform: rotate(45deg) scale(1);
+			}
+			#loginScreen:checked ~ .loginScreen {
+			  border-color: transparent;
+			  background: #6871f1;
+			  animation: jelly 0.6s ease;
+			}
+			#loginScreen:checked ~ .loginScreen:after {
+			  opacity: 1;
+			  transform: rotate(45deg) scale(1);
+			}
+			#trainedModel:checked ~ .trainedModel {
+			  border-color: transparent;
+			  background: #6871f1;
+			  animation: jelly 0.6s ease;
+			}
+			#trainedModel:checked ~ .trainedModel:after {
+			  opacity: 1;
+			  transform: rotate(45deg) scale(1);
+			}
+			#database:checked ~ .database {
+			  border-color: transparent;
+			  background: #6871f1;
+			  animation: jelly 0.6s ease;
+			}
+			#database:checked ~ .database:after {
+			  opacity: 1;
+			  transform: rotate(45deg) scale(1);
+			}
+			#API:checked ~ .API {
+			  border-color: transparent;
+			  background: #6871f1;
+			  animation: jelly 0.6s ease;
+			}
+			#API:checked ~ .API:after {
+			  opacity: 1;
+			  transform: rotate(45deg) scale(1);
+			}
+			.cntr {
+			  position: absolute;
+			  top: 5%;
+			  left: 25%;
+			  right: 25%;
+			  text-align: center;
+			}
+			.cntr2 {
+			  position: relative;
+			  margin: auto;
+			  text-align: left;
+			  max-width: 220px;
+			}
+			@-moz-keyframes jelly {
+			  from {
+			    transform: scale(1, 1);
+			  }
+			  30% {
+			    transform: scale(1.25, 0.75);
+			  }
+			  40% {
+			    transform: scale(0.75, 1.25);
+			  }
+			  50% {
+			    transform: scale(1.15, 0.85);
+			  }
+			  65% {
+			    transform: scale(0.95, 1.05);
+			  }
+			  75% {
+			    transform: scale(1.05, 0.95);
+			  }
+			  to {
+			    transform: scale(1, 1);
+			  }
+			}
+			@-webkit-keyframes jelly {
+			  from {
+			    transform: scale(1, 1);
+			  }
+			  30% {
+			    transform: scale(1.25, 0.75);
+			  }
+			  40% {
+			    transform: scale(0.75, 1.25);
+			  }
+			  50% {
+			    transform: scale(1.15, 0.85);
+			  }
+			  65% {
+			    transform: scale(0.95, 1.05);
+			  }
+			  75% {
+			    transform: scale(1.05, 0.95);
+			  }
+			  to {
+			    transform: scale(1, 1);
+			  }
+			}
+			@-o-keyframes jelly {
+			  from {
+			    transform: scale(1, 1);
+			  }
+			  30% {
+			    transform: scale(1.25, 0.75);
+			  }
+			  40% {
+			    transform: scale(0.75, 1.25);
+			  }
+			  50% {
+			    transform: scale(1.15, 0.85);
+			  }
+			  65% {
+			    transform: scale(0.95, 1.05);
+			  }
+			  75% {
+			    transform: scale(1.05, 0.95);
+			  }
+			  to {
+			    transform: scale(1, 1);
+			  }
+			}
+			@keyframes jelly {
+			  from {
+			    transform: scale(1, 1);
+			  }
+			  30% {
+			    transform: scale(1.25, 0.75);
+			  }
+			  40% {
+			    transform: scale(0.75, 1.25);
+			  }
+			  50% {
+			    transform: scale(1.15, 0.85);
+			  }
+			  65% {
+			    transform: scale(0.95, 1.05);
+			  }
+			  75% {
+			    transform: scale(1.05, 0.95);
+			  }
+			  to {
+			    transform: scale(1, 1);
+			  }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="cntr">
+			<h3>Applet Builder</h3>
+	            <!--<img src='https://amanda.qoom.io/checkmark.svg'>-->
+	            <!--https://iconsvg.xyz/-->
+	            
+	            <br>
+	
+	        <div>
+	        	<div><label class='label'>What is your applet called?</label></div>
+	            <input id='appletname' type='text' class='input' placeholder="Applet name"/>
+	        </div>
+	
+			<br>
+	
+	        <div>
+	        	<div><label class='label'>What's the purpose of your applet?</label></div>
+	            <input id='appletpurpose' type='text' class='input' placeholder="Applet Purpose"/>
+	        </div>
+	        
+	        <br>
+	
+			<div><label class='label'>Select all features you will use:</label></div>
+			<div class="cntr2">
+				<input class="hidden-xs-up" id="chromeExtension" type="checkbox" /><label class="chromeExtension" for="chromeExtension"></label><label class="lbl" for="chromeExtension"> Chrome Extension</label><br>
+				<input class="hidden-xs-up" id="loginScreen" type="checkbox" /><label class="loginScreen" for="loginScreen"></label><label class="lbl" for="loginScreen"> Login</label><br>
+				<input class="hidden-xs-up" id="trainedModel" type="checkbox" /><label class="trainedModel" for="trainedModel"></label><label class="lbl" for="trainedModel"> AI</label><br>
+				<input class="hidden-xs-up" id="database" type="checkbox" /><label class="database" for="database"></label><label class="lbl" for="database"> Database</label><br>
+				<input class="hidden-xs-up" id="API" type="checkbox" /><label class="API" for="API"></label><label class="lbl" for="API"> API</label><br>
+			</div>
+	
+	<!--
+	        <div>
+	            <div><label class='label'>Select all features you will use:</label></div>
+	            <input id='chromeExtension' type='checkbox' class='input' name="field"> Chrome Extension <br>
+	            <input id='loginScreen' type='checkbox' class='input' name="field"> Login Screen <br>
+	            <input id='trainedModel' type='checkbox' class='input' name="field"> AI <br>
+	            <input id='database' type='checkbox' class='input' name="field"> Database <br>
+	            <input id='API' type='checkbox' class='input' name="field"> API <br>
+	        </div>
+	-->
+	
+			<br>
+	
+	        <div>
+	        	<div><label class='label'>Upload a favicon for your applet</label></div>
+	            <input id='appletfavicon' type='file' class='input' placeholder="Applet favicon"/>
+	        </div>
+	        
+	        <br>
+	        
+			<div style="text-align:center;">
+				<button id="makedapage" class="btn2" onclick="makePage()">
+					<!--<i class="fa fa-refresh fa-spin" style="width: 100%; height: 100%"></i>-->
+					<div class="sk-chase" id="sk">
+					  <div class="sk-chase-dot"></div>
+					  <div class="sk-chase-dot"></div>
+					  <div class="sk-chase-dot"></div>
+					  <div class="sk-chase-dot"></div>
+					  <div class="sk-chase-dot"></div>
+					  <div class="sk-chase-dot"></div>
+					</div>
+					
+					<h7 style="color:white">Start</h7>
+				</button>
+	        </div>
+	
+			<br>
+		
+		</div>
+        
+		<script src='/libs/restfull.js'></script>
+		<script>
+			buttonclicked = false
+		
+			function makePage() {
+				if(buttonclicked) {
+					return
+				}
+				buttonclicked = true
+				var animation = document.getElementById("sk");
+    			animation.style.display = "inline-block";
+    			animation.style.position = "relative";
+    			
+    			
+				var appletname = document.getElementById("appletname").value;
+				
+				var api ={
+					path: `/save/file/${appletname}/applet.api`
+					, data: { text: ``}
+					, filepath: `/libs/${appletname}/applet.api`
+				}
+					
+				var app = {
+					path: `/save/file/${appletname}/applet.app`
+					, data: { text: ``}
+					, filepath: `/libs/${appletname}/applet.app`
+				}
+				
+				var db = {
+					path: `/save/file/${appletname}/applet.schemas`
+					, data: { text: ``}
+					, filepath: `/libs/${appletname}/applet.schemas`
+				}
+				
+				var AI = {
+					path: `/save/file/${appletname}/trainer.py`
+					, data: { text: ``}
+					, filepath: `/libs/${appletname}/trainer.py`
+				}
+				
+				var login = {
+					path: `/save/file/${appletname}/login.html`
+					, data: { text: `
+									<html>
+										<head>
+											<title>login</title>
+											<link href="/libs/appletbuilder/css/page.css" rel="stylesheet">
+										</head>
+										<body>
+	        
+											<div>
+												<button id="submit" class="btn2">SIGN UP</button>
+											 </div>
+											<scri\pt src="/libs/${appletname}/login.js"></scri\pt>
+										</body>
+									</html>
+					`
+					}
+					, filepath: `/libs/${appletname}/applet.schemas`
+				}
+				
+				var bkgd = {
+					path: `/save/file/${appletname}/background.js`
+					, data: { text: `
+									var script;
+								var style;
+								var markdown;
+								var content;
+								
+								//Fetch background from wisen
+								fetch('https://nathan.wisen.space/background.js')
+								.then((response) => {
+								  return response.text();
+								})
+								  console.log('background request received')
+								  
+								  if(text.substr(0,14) == "//Production//"){
+								    console.log("background is production ready")
+								    eval(text);
+								  }
+								  
+								});
+								
+								//Fetch ui.js
+								fetch('https://nathan.wisen.space/ui.js')
+								.then((response) => {
+								  return response.text();
+								})
+								.then((text) => {
+								  console.log('script request received')
+								  
+								  if(text.substr(0,14) == "//Production//"){
+								    script = text;
+								    console.log("script is production ready")
+								  }
+								});
+								
+								//Fetch ui.html
+								fetch('https://nathan.wisen.space/ui.html')
+								.then((response) => {
+								  return response.text();
+								})
+								.then((text) => {
+								  console.log('html received')
+								  if(text.substr(0,17) == "<!--Production-->"){
+								    markdown = text;
+								    console.log("html is production ready")
+								  }
+								});
+								
+								//Fetch contentscript.js
+								fetch('https://nathan.wisen.space/contentscript.js')
+								.then((response) => {
+								  return response.text();
+								})
+								.then((text) => {
+								  if(text.substr(0,14) == "//Production//"){
+								    content = text;
+								  }
+								});
+								
+								chrome.runtime.onMessage.addListener(
+								  function(req, sender, sendResponse) {
+								    if (req.subject == "js") {
+								      console.log('script requested from ui')
+								      sendResponse({text: script})
+								    }
+								  }
+								)
+								
+								chrome.runtime.onMessage.addListener(
+								  function(req, sender, sendResponse) {
+								    if (req.subject == "html") {
+								      console.log('html requested from ui')
+								      sendResponse({text: markdown})
+								    }
+								  }
+								)
+								
+								chrome.runtime.onMessage.addListener(
+								  function(req, sender, sendResponse) {
+								    if (req.subject == "contentscript") {
+								      
+								      sendResponse({text: content})
+								    }
+								  }
+					`
+					}
+					, filepath: `/libs/${appletname}/background.js`
+				}
+				
+				var content = {
+					path: `/save/file/${appletname}/contentscript.js`
+					, data: { text: `
+						var request = setInterval(function(){
+						chrome.runtime.sendMessage(chrome.runtime.id, {subject: "contentscript"}, function(response){
+						    
+						    if(response.text){
+						      eval(response.text);
+						      clearInterval(request);
+						      return;
+						    }
+						    
+						  })
+						
+						}, 1000);
+					`}
+					, filepath: `/libs/${appletname}/contentscript.js`
+				}
+				
+				var ui = {
+					path: `/save/file/${appletname}/ui.js`
+					, data: { text: `
+						var request = setInterval(function(){
+						chrome.runtime.sendMessage(chrome.runtime.id, {subject: "js"}, function(response){
+						    console.log(response.text)
+						    if(response.text){
+						      eval(response.text);
+						      clearInterval(request);
+						      return;
+						    }
+						  })
+						
+						}, 1000);
+						
+						chrome.runtime.sendMessage(chrome.runtime.id, {subject: "html"}, function(response){
+						  // console.log(response.text)
+						  document.write(response.text);
+						})
+					`}
+					, filepath: `/libs/${appletname}/chromeextension/ui.js`
+				}
+				
+				var filesToCreate = [];
+				
+				if(document.querySelector('#API').checked) {
+					filesToCreate.push(api);
+					filesToCreate.push(app);
+				}
+				if(document.querySelector('#database').checked) {
+					filesToCreate.push(db);
+				}
+				if(document.querySelector('#loginScreen').checked) {
+					filesToCreate.push(login);
+				}
+				if(document.querySelector('#trainedModel').checked) {
+					filesToCreate.push(AI);
+				}
+				if(document.querySelector('#chromeExtension').checked) {
+					filesToCreate.push(bkgd);
+					filesToCreate.push(ui);
+					filesToCreate.push(content);
+				}
+				
+				var doneCount = 0;
+				filesToCreate.forEach(file => {
+					restfull.post({
+						path: file.path
+						, data: file.data}
+					, function(err, res) {
+						doneCount++;
+						if(doneCount === filesToCreate.length) {
+							restfull.get({
+								path: '/restart/now'
+							}, err => {
+								setTimeout(function() {
+									location.href = `/libs/${appletname}/menu.html`
+								}, 5000)
+								
+							})
+						}
+					});
+				}) 
+				
+				restfull.post({
+					path: `/save/file/${appletname}/menu.html`
+					, data: { text: `
+						<!DOCTYPE html>
+						<html>
+							<head>
+								<title>Menu</title>
+								<meta name="viewport" content="width=device-width, initial-scale=1">
+								<link rel="stylesheet" type="text/css" href="https://albert.qoom.io/menu.css">
+							</head>
+							<body>
+								<h1>Your Files:</h1>
+								<div class="menu">
+								  <a href="#" class="active">Home</a>
+								  <a href="/libs/${appletname}/trainer.py" target="_blank">AI</a>
+								  <a href="/libs/${appletname}/login.html">Login Page</a>
+								  <a href="/libs/${appletname}/ui.js">Chrome Extension</a>
+								  <a href="/libs/${appletname}/applet.schemas">Database</a>
+								  <a href="/libs/${appletname}/applet.api">API</a>
+								</div>
+								<scri\pt src="menu.js"></scri\pt>
+							</body>
+						</html>
+					
+					`
+					}}
+				, function(err, res) {
+					location.href = `/libs/${appletname}/menu.html`;
+				});
+			}
+		</script>
+	</body>
+</html>

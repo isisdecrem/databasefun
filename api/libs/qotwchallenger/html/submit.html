@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>QOTW</title>
+	<link rel="stylesheet" type="text/css" href="/libs/icons/icons.css">
+	<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+	<!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="/libs/administrater/assets/favicon.png" type="image/png">
+	<style>
+		{{BASECSS}}
+		{{STYLES}}
+		{{SUBMITCSS}}
+	</style>
+</head> 
+<body>
+	<header>
+		{{MENU}}
+		{{HEADER}}
+	</header>
+	<main>
+		<form id='submission' method='POST' action='/qotw/submit/id'>
+			<h2><span>Submit Your Project</span><hr></h2>
+			<h3><span>{{DATE}}</span><span>{{TITLE}}</span></h3>
+			<label>Select a project to submit</label>
+			<span>*To submit a project, you need to publish the project first</span>
+			<select {{DISABLEPROJECT}} name='project'>{{PROJECTOPTIONS}}</select>
+			<label>Who worked on this project</label>
+			<section class='who'>
+				<input type='text' placeholder='Full Name' name='name' value='{{PERSON}}' disabled><input type='text' placeholder='Qoom Account Url' name='ship' value='{{SHIP}}' disabled>
+				<input type='text' placeholder='Full Name' name='name'><input type='text' placeholder='Qoom Account Url' name='ship'>
+			</section>
+			<a id='addMore'>Add More</a>
+			<label>Select a Challenge Tier</label>
+			<section class='challenge'>
+				<input type='radio' name='challenge' value='open' checked><label>Open Challenge</label><span>Free</span>
+				<input type='radio' name='challenge' value='paid'><label>Qoom Challenge</label><span>US$10</span>
+			</section>
+			<label class='payment'>Payment <span>$10</span></label>
+			<section class='payment'>
+				<div>
+					<input type='radio' name='payment' value='credit' checked><label>Credit or Debit Card</label>
+				</div>
+				<div>
+					<input type='radio' name='payment' value='paypal'><label>Paypal</label>
+				</div>
+			</section>
+			<div id='credit' class='payment'>
+				<div id='card'></div>
+		    	<div id='cardErrors' role='alert'></div>
+		    	<div class="stripe-text">Your credit card will be processed by 
+		    		<a href='https://stripe.com/' style="font-size: 12px;">Stripe</a>.
+		    	</div>
+			</div>
+			<div id='paypal' class='payment'>
+				<div id="smart-button-container">
+			      <div style="text-align: center;">
+			        <div id="paypal-button-container"></div>
+			      </div>
+			    </div>
+			</div>
+			<input id='tag' type='hidden' value='' name='tag'>
+			<button><span>Submit</span></button>
+		</form>
+	</main>
+	<footer>{{FOOTER}}</footer>
+	<script>var stripeToken = '{{STRIPETOKEN}}';</script>
+	<script src='https://js.stripe.com/v3/'></script>
+	<script src="https://www.paypal.com/sdk/js?client-id={{PAYPALCLIENTID}}&disable-funding=credit" data-namespace="paypal_sdk"></script>
+	<script>
+		{{BASEJS}}
+		{{SCRIPT}}
+		{{SUBMITJS}}		
+	</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		 <link href="https://fonts.googleapis.com/css2?family=Piedra&display=swap" rel="stylesheet"> 
+		<style>
+			body {
+				display:grid;
+				grid-template-areas: "h h h" "n m a" "f f a";
+				margin:0;
+				grid-template-rows: 50px auto 25px;
+				grid-template-columns: 75px auto 200px;
+				height:100vh;
+				width:100vw;
+				overflow:hidden;
+				font-family: 'Piedra', cursive;
+			}
+			
+			header {
+				grid-area: h;
+				background-color:#001D4A;
+				color:white;
+				padding:3px;
+				text-align:center;
+				font-size:36px;
+			}
+			
+			nav  {
+				grid-area: n;
+				background-color:#27476E;
+				color:#ECA400;
+			}
+			
+			main  {
+				grid-area: m;
+				background-color:#EAF8BF;
+				color:#232323;
+			}
+			
+			aside  {
+				grid-area: a;
+				background-color:#ECA400;
+				color:#001D4A;
+			}
+			
+			footer {
+				grid-area: f;
+				background-color:#006992;
+				color:#ECA400;
+				text-align:center;
+				padding:2px;
+			}
+			
+			div {
+				display:grid;
+				width:50px;
+				grid-gap:20px;
+				margin:10px;
+			}
+			
+			button {
+				background-color:#464646;
+				border:solid 1px #ECA400;
+			}
+			
+			@media (min-width: 0px) and (max-width: 720px) {
+				
+				body {
+					grid-template-areas: "h h h" 
+										 "n n n" 
+										 "m m a"
+										 "m m a"
+										 "f f a";
+					grid-template-rows: 50px 75px auto auto 25px;
+					grid-template-columns: auto;
+					min-height:100vh;
+					width:100vw;
+				}
+				
+				div {
+					grid-template-columns:100px 100px 100px 100px;
+				}
+				
+				
+			}
+		</style>
+		<script>
+			function startWebScraper() {
+				/*
+				1. Ask the server to '/collect/websites'
+				2. Show the user the response
+				*/
+				
+				var answer = prompt('How much money do you want?');
+				
+				fetch('/collect/money', {
+					method: 'POST'
+					, body: JSON.stringify({ answer: answer })
+					, headers: {
+						'content-type': 'application/json'	
+					}
+				})
+				.then(function(resp) {
+					resp.text().then(function(text) {
+						alert(text);
+					})
+				})
+				
+			}
+			
+			function scrapeWeather() {
+				const listOfCities = ['seoul','daegu', 'mokpo', 'chuncheon', 'busan', 'goyang'];
+				listOfCities.forEach(city => {
+					fetch('/collect/weather/' + city).then(resp => {
+						resp.json().then(temp => {
+							var d = document.createElement('div');
+							d.innerHTML = `
+							<div>
+								<h2>${city}</h2>
+								<div style='display:flex; flex-direction:row;'>
+									Current
+									<span>${temp.currentTemperature}</span>
+									High
+									<span>${temp.highTemp}</span>
+									Low
+									<span>${temp.lowTemp}</span>
+								</div>
+							</div>`;
+							document.querySelector('main').appendChild(d);
+						});
+					})
+				})
+			}
+			
+			function scrapeSeoulWeather() {
+
+				fetch('/collect/historicalweather/seoul').then(resp => {
+					resp.json().then(temp => {
+						var d = document.createElement('div');
+						document.querySelector('main').innerHTML = JSON.stringify(temp);
+					});
+				})
+			}
+			
+			function scrapeBaseball() {
+				fetch('/collect/baseball').then(resp => {
+					resp.json().then(temp => {
+						var d = document.createElement('div');
+						d.innerHTML = temp.gameSummary;
+						document.querySelector('main').appendChild(d);
+					});
+				})
+			}
+		</script>
+	</head>
+	<body>   
+		<header>
+			{{NAME}}'s Data Collector
+		</header>
+		<nav>
+			<div>
+				<button onclick='startWebScraper()'>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ECA400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+				</button>
+				<button>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ECA400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M20.4 14.5L16 10 4 20"/></svg>
+				</button>
+				<button>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ECA400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M8 17V5l12-2v12"/></svg>
+				</button>
+				<button onclick='scrapeSeoulWeather()'>
+					☀️🇰🇷
+				</button>
+				<button onclick='scrapeBaseball()'>
+					⚾
+				</button>
+			</div>
+		</nav>
+		<aside>
+			Settings
+		</aside>
+		<main>
+			Reports
+		</main>
+		<footer>
+			Made by Jared Lera
+		</footer>
+	</body>
+</html>

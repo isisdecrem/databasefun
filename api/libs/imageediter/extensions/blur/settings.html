@@ -1,0 +1,56 @@
+<div>
+    <style>
+        #blurDiv {
+            text-align: center;
+            width: 95%;
+            max-width: 100%;
+            max-height: 90vh;
+            overflow: scroll;
+            margin: 2.5%;
+            background-color: inherit;
+            color: inherit;
+            font: inherit;
+            font-family: inherit;
+            font-style: inherit;
+            display: none;
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+            scrollbar-width: none; /* Firefox */
+            border: 0;
+            margin: 0;
+            background-repeat: 0;
+        }
+        #blurDiv::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
+    <!-- <link
+        href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+        rel="stylesheet"
+    /> -->
+    <!-- <link href="/libs/imageediter/vuetify.css" rel="stylesheet" /> -->
+
+    <v-app id="blurDiv" :style="{ display: display }">
+        <v-container>
+            <v-row justify="center">
+                <h4>Blur</h4>
+            </v-row>
+            <br />
+            <br />
+            <v-card d-inline-block mx-auto>
+                <v-container>
+                    <v-col>
+                        <v-row>
+                            <v-btn width="100%" @click="gaussianBlur()">Gaussian</v-button>
+                        </v-row>
+                        <br />
+                        <br />
+                        <v-row>
+                            <v-btn width="100%" @click="boxBlur()">Box</v-button>
+                        </v-row>
+                    </v-col>
+                </v-container>
+            </v-card>
+        </v-container>
+    </v-app>
+</div>

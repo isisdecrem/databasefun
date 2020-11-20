@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{TITLE}}</title>
+    <style type="text/css" media="screen">
+    #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    </style>
+    <script>
+        if(!!window.performance && window.performance.navigation.type === 2) {
+            window.location.reload();
+        }
+    </script>
+</head>
+
+<body style="background-color:#141414;">
+
+    <div id="editor">||data||</div>
+
+    <script src="/apps/editer/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+    var editor = ace.edit("editor");
+    var pathParts = location.pathname.toLowerCase().split('/');
+    var lastPath = pathParts[pathParts.length - 1];
+    var docId = lastPath === 'create' ? null : lastPath;
+    editor.setTheme("ace/theme/github");
+    editor.getSession().setOptions({ tabSize: 4, useSoftTabs: false });
+
+    var storedOptions = localStorage.getItem('aceOptions');
+    try {
+        if(storedOptions) {
+            storedOptions = JSON.parse(storedOptions);
+            delete storedOptions.mode;
+            editor.setOptions(storedOptions);
+        }
+    } catch(ex) {
+
+    }
+
+    editor.getSession().setMode("ace/mode/json");
+
+    var $container = document.getElementsByTagName("body")[0];
+    $container.onkeyup = keyUpHandler;
+
+    var lastSaveData = editor.getValue().trim();
+    var isEditing = false;
+    var isSaving = false;
+
+    function keyUpHandler(e) {
+        if (isEditing) return;
+        isEditing = true;
+        setTimeout(function() {
+            isEditing = false
+        }, 2000);
+        if (e.ctrlKey && e.keyCode === 83) return saveContents();
+    }
+
+    function saveContents() {
+        var val = editor.getValue().trim();
+        if (isSaving || val === lastSaveData || isEditing) return;
+        isSaving = true;
+        try {
+            JSON.parse(val);
+        } catch(ex) {
+            isSaving = false;
+            return false;
+        }
+        post(val, function() {
+            lastSaveData = val;
+            isSaving = false;
+        });
+        return false;
+    }
+
+    function post(data, callback) {
+        var req = new XMLHttpRequest();
+        var url = docId ? location.pathname.replace(/\/create$/i, '/update/' + docId) : location.pathname;
+        var method = docId ? 'PATCH' : 'POST';
+        req.open(method, url, true);
+        req.setRequestHeader("content-type", "application/json")
+        if(localStorage && localStorage.passcode) {
+            req.setRequestHeader("secret", localStorage.passcode)
+        }
+        req.onreadystatechange = function() {
+            if (req.readyState == 4 && req.status == 200) {
+                var resp = JSON.parse(req.responseText);
+                if (resp.id) {
+                    docId = resp.id;
+                }
+                console.log(resp);
+                callback();
+            } else if(req.readyState == 4) {
+                callback();
+            }
+        }
+
+        req.send(JSON.stringify({
+            text: data
+        }));
+    }
+   
+    function saveSettings() {
+        localStorage.setItem('aceOptions', JSON.stringify(editor.getOptions()));
+    }
+
+    setInterval(saveSettings, 2000);
+   
+
+    window.onbeforeunload = function() {
+        var val = editor.getValue().trim();
+        saveSettings();
+        if (val === lastSaveData) return;
+        return 'Are you sure you want to exit?';
+    }
+    
+    setInterval(saveContents, 1000);
+    </script>
+</body>
+
+</html>

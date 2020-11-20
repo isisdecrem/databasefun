@@ -1,0 +1,83 @@
+.help-form-overlay-main-view {
+	margin: 2rem;
+	text-align: left;
+}
+
+.help-form-overlay-stars-container {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.help-form-overlay-main-view label {
+	font-size: 1rem !important;
+}
+
+
+
+.help-form-overlay-file-upload-box {
+	border: var(--text-dark-medium) dashed 1px;
+	padding: 1rem;
+	height: 5rem;
+	border-radius: 0.5rem;
+}
+
+
+.help-form-overlay-file-upload-title {
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+}
+.help-form-overlay-file-upload-subtitle {
+	font-size: 0.75rem;
+}
+.help-form-overlay-file-upload-file-select-button {
+	text-decoration: underline;
+}
+
+.help-form-overlay-file-upload-input {
+	display: none;
+}
+
+.help-form-overlay-file-upload-status-container {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.help-form-overlay-file-upload-status-container:nth-child(3n) {
+	background: var(--color-gray-400);
+}
+
+.help-form-overlay-file-upload-status-file-status-bar {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 0 auto;
+}
+
+.help-form-overlay-file-upload-status-file-status-bar-bar {
+	width: 100%;
+	background: var(--color-primary);
+}
+
+.help-form-overlay-file-upload-status-file-info {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 3fr 2fr;
+}
+
+.help-form-overlay-file-upload-status-file {
+	display: grid;
+	grid-template-rows: auto 1px;
+	margin: 0.25rem;
+}
+
+.help-form-overlay-file-upload-status-file-name {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+}
+
+.help-form-overlay-file-upload-status-file-size {
+	text-align: right;
+}

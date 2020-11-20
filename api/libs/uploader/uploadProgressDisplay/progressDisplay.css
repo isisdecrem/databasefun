@@ -1,0 +1,112 @@
+#uploaderProgressDisplay {
+	position: fixed;
+	bottom: 16px;
+	left: auto;
+	right: 40px;
+	display: none;
+	z-index: 10000;
+	color: var(--text-dark-high);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#uploaderProgressDisplay .unselectable {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#uploaderProgressDisplay .lessProminantText {
+	color: var(--text-dark-medium);
+}
+
+#uploaderProgressDisplay .disabledText {
+	color: var(--text-dark-disabled);
+}
+
+#uploaderProgressDisplay .maininfobar {
+	width: 640px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--color-gray-50);
+}
+
+#uploaderProgressDisplay .maininfobar:hover {
+	cursor: pointer;
+}
+
+#uploaderProgressDisplay .expandedinfocube {
+	display: none;
+	padding-left: 8px;
+	width: 640px;
+	align-items: center;
+	background: var(--color-gray-10);
+	align-items: center;
+	justify-content: center;
+	border-radius-topleft: 4px;
+	border-radius-topright: 4px;
+	
+}
+
+#uploaderProgressDisplay .progressbar {
+	background: var(--color-blue-50);
+	height: 4px;
+	display: grid;
+	grid-template-columns: 0% auto;
+}
+
+#uploaderProgressDisplay .progressbaremptyspace {
+	background: var(--color-blue-50);
+}
+
+#uploaderProgressDisplay .progressbarbar {
+	background: var(--color-secondary);
+	height: 100%;
+	width: 100%;
+}
+
+#uploaderProgressDisplay .infobarContent {
+	width: calc(100% - 16px);
+	display: grid;
+	overflow: hidden;
+	grid-gap: 16px;
+	grid-template-columns: 1.5rem auto 10rem 4rem;
+	margin: 12px 0;
+}
+
+#uploaderProgressDisplay .infobarContent p {
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 24px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#uploaderProgressDisplay .infobarContent i {
+	width: 16px;
+	height: 16px;
+	margin: 4px;
+}
+
+#uploaderProgressDisplay .expandedinfocubecontents {
+	width: 100%;
+	max-height: 25vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#uploaderProgressDisplay .expandedinfocubecontents .infobarContent {
+	grid-template-columns: 1.5rem auto 4rem;
+}
+
+#uploaderProgressDisplay .expandedinfocubecontents .infobarContent p:last-child {
+	text-align: right;
+}
+#uploaderProgressDisplay .maininfobar .infobarContent .cancelButton:hover {
+	cursor: pointer;
+	text-transform: capitalize;
+	color: var(--color-secondary);
+}

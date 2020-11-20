@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Python Runner</title>
+		<style>
+			body {
+				background: #fff;
+				margin: 0;
+				width: 100vw;
+				height: 100vh;
+				overflow:hidden;
+			}
+			
+			button {
+				position:absolute;
+				top: 2vh;
+				right: 2vw;
+				z-index: 100;
+			}
+
+		</style>
+
+
+    	<script type="text/javascript" src="/libs/pythoner/assets/brython.js"></script>
+    	<script type="text/javascript" src="/libs/pythoner/assets/brython_stdlib.js"></script>
+		<script>
+			function run() {
+				const $code = document.querySelector('#code')
+					, code = $code.innerText
+				;
+
+				let  $pythoncode = document.querySelector('#pythoncode');
+				if($pythoncode) $pythoncode.parentElement.removeChild($pythoncode);
+				
+				$pythoncode = document.createElement('script');
+				$pythoncode.setAttribute('type', 'text/python');
+				$pythoncode.innerHTML = code;
+				document.body.appendChild($pythoncode);
+				brython();
+				
+			}
+		</script>
+	
+	</head>
+	<body>
+	
+		
+		<button id="run" onclick="run()"> ▶ Run</button>
+		<div id="code" style='display:none'>
+{{CODE}}
+		</div>
+		<div id='turtle-div'></div>
+	</body>
+</html>

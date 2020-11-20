@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Admin View</title>
+	<style>
+		body {
+			background-color:#232323;
+			color:#EFEFEF;
+		}
+
+		table {
+			margin:2em;
+		}
+
+		td:first-child {
+			font-size:xx-small;
+		}
+		a {
+			color: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Register Admin Viewer</h1>
+		<table>
+			<thead>
+				<tr>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<a href='' target='_blank'>Create</a>
+	</div>
+
+	<script>
+		var data = ||data||;
+		var $thead = document.querySelector('thead');
+		var $tbody = document.querySelector('tbody');
+		var $a = document.querySelector('a');
+		var headers = Object.keys(data[0] || {});
+
+		$thead.innerHTML = headers.map(h => {
+			return '<th>' + h + '</th>';
+		}).join('\n');
+
+		$tbody.innerHTML = data.map(d => {
+			var row = '<tr>';
+
+			var cells = headers.map((h, i) => {
+				var contents = i ? d[h] : '<a href="/registration/update/' + d[h] + '">' + d[h] + '</a>';
+				return '<td>' + contents + '</td>';
+			}).join('');
+			row += cells;
+			row += '</tr>';
+			return row;
+		}).join('\n');
+
+		$a.href = '/registration/create';
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+{
+    "name" : "update_latest_version",
+    "flow" : [
+        {
+            "step" : "get_source_version" 
+        },
+        {
+            "step" : "get_destination_version"
+        },
+        {
+            "step" : "get_ignore"
+        },
+        {
+            "step" : "pull_version"
+        }
+    ],
+    "steps" : [ 
+          {
+            "name" : "get_source_version",
+            "description" : "Get version from source",
+            "app" : "versioner",
+            "method" : "getLatestShipVersion",
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"planet": "domain"
+            		, "planetdb": "dbName"
+            	}
+            },
+            "output": "sourceVersion"
+        },
+        {
+            "name" : "get_destination_version",
+            "description" : "Get version from destination",
+            "app" : "versioner",
+            "method" : "getLatestShipVersion",
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"requestDomain": "domain"
+            	}, "stepInput": {
+            		"dbName": "MONGODB_URI"
+            	}
+            },
+            "output": "destinationVersion"
+        },
+        {
+            "name" : "get_ignore",
+            "description" : "Get ignore json",
+            "app" : "updater",
+            "method" : "getIgnoreJson",
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"requestDomain": "domain"
+            	}
+            },
+            "output": "ignore"
+        },
+        {
+            "name" : "pull_version",
+            "description" : "Uploads the files in the version to the current database",
+            "app" : "updater",
+            "method" : "pullVersion",
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"sourceVersion": "sourceVersion"
+            		, "destinationVersion": "destinationVersion"
+            		, "planetdb": "dbName"
+            		, "planet": "planet"
+            		, "ignore": "ignore"
+            	}
+            }
+        }
+    ]
+}

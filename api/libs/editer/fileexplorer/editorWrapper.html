@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script defer type="module">
+			import {main} from "/libs/editer/fileexplorer/editorWrapper.js";
+			const startingFileInfo = JSON.parse(`||STARTINGFILEINFO||`);
+			main(startingFileInfo).then();
+		</script>
+		<link rel="stylesheet" href="/libs/editer/fileexplorer/editorWrapper.css" />
+		<link rel="stylesheet" href="/libs/administrater/css/qoom.css" />
+		<link rel="stylesheet" href="/libs/icons/icons.css" />
+	</head>
+	<body>
+		<div class="fileexplorer-sidebar">
+			<div class="fileexplorer-title-container">
+				<h4 class="fileexplorer-title-text">Qoom Editor</h4>
+			</div>
+			<div class="fileexplorer-files"></div>
+		</div>
+		<div class="fileexplorer-editor-main">
+			<div class="fileexplorer-editor-tabs"></div>
+			<div class="fileexplorer-editors-container"></div>
+		</div>
+	</body>
+</html>

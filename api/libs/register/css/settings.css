@@ -1,0 +1,317 @@
+.settings-page-container {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	background-color: var(--color-gray-10);
+	padding: 40px 0;
+}
+
+.settings-main-container {
+	width: 960px;
+	background-color: #fff;
+	margin-bottom: 40px;
+}
+
+.settings-title-container {
+	width: 100%;
+	border-bottom: solid var(--color-primary) 2px;
+}
+
+.settings-title {
+	color: var(--color-primary);
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 48px;
+	padding: 8px 40px;
+}
+
+.settings-content-box {
+	position: relative;
+	padding: 24px 40px;
+}
+
+.settings-content > * {
+	margin-bottom: 16px;
+}
+
+/*.settings-content > *:last-child{*/
+/*	margin-bottom: 0;*/
+/*}*/
+
+.settings-content .control-account-container > div{
+	display: flex;
+	flex-flow: row nowrap;
+	column-gap: 2rem;
+	margin-bottom: 12px;
+}
+.settings-content .control-account-container > div > p:first-child {
+	width: 7rem;
+}
+
+.settings-content table {
+	width: 70%;
+}
+
+.settings-content {
+	font-weight: 300;
+}
+
+.settings-content button {
+	width: fit-content;
+	width: -moz-fit-content;
+	min-width: 160px;
+}
+.settings-content .control-text {
+	color: var(--color-primary);
+	cursor: pointer;
+	font-size: 14px;
+}
+.settings-content .control-text a {
+	text-decoration: underline;
+}
+.settings-content .control-text a:hover {
+	text-decoration: underline;
+}
+.settings-content .updated-text {
+	color: var(--color-green);
+	margin-left: 16px;
+}
+.settings-content .form-input > p {
+	margin-bottom: 8px;
+}
+.settings-content .form-input > div {
+	margin-bottom: 24px;
+}
+/*USERNAME UPDATE MODAL*/
+.username-checked.available {
+	color: var(--color-green);
+	font-size: 12px;
+}
+.username-checked.taken {
+	color: var(--color-red);
+	font-size: 12px;
+}
+#updateUserNameModal .form-input {
+	margin-bottom: 0;
+}
+/*ACCOUNT*/
+#emailEditBtn {
+	display: none;
+}
+/*CHANGE PASSWORD*/
+.change-password {
+	display: none;
+}
+.change-password .form-input .input-items {
+	width: 50%;
+}
+/*PUBLIC PROFILE*/
+.public-profile {
+	/*display: none;*/
+}
+.public-profile .first-row
+, .public-profile .second-row {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+.public-profile .first-row .left-container {
+	width: 40%;
+	display: flex;
+	align-content: space-around;
+	justify-content: space-around;
+}
+.public-profile .first-row .right-container {
+	width: 60%;
+}
+.public-profile .second-row .left-container {
+	width: 50%;
+}
+.public-profile .second-row .right-container {
+	width: 50%;
+	display: flex;
+    flex-direction: row-reverse;
+}
+.public-profile .first-row .right-container .form-input {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.public-profile .first-row .right-container .form-input .input-items {
+	width: 100%;
+}
+.public-profile .links-container .profile-link {
+	margin-bottom: 8px;
+}
+.qoom-plan {
+	/*display: none;*/
+}
+.qoom-plan table
+,.backup table
+,.delete-account table {
+	width: 100%;
+}
+.qoom-plan table tr td:nth-child(2) {
+	padding-right: 16px;
+	text-align: right;
+}
+.qoom-plan table tr td:last-child
+,.backup table tr td:last-child
+,.delete-account table tr td:last-child {
+	width: 160px;
+}
+.pf-picture {
+	width: 320px;
+	height: 320px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+	border-radius: 5px;
+	border: 1px dotted var(--color-gray-400);
+}
+.pf-picture > p {
+	margin: auto;
+	text-align: center;
+	color: var(--text-dark-medium);
+}
+.pf-picture i {
+	margin: auto;
+	text-align: center;
+	width: 25px;
+	height: 25px;
+}
+.profile-picture-container {
+	position: relative;
+}
+.profile-picture-container .control-text {
+	text-align: right;
+	margin-top: 8px;
+	display: none;
+}
+.profile-picture {
+	align-self: center;
+	object-fit: cover;
+	display: flex;
+}
+.change-profile-picture {
+	display: none;
+	position: absolute;
+	top: 0;
+	opacity: 0;
+	background-color: #000;
+	color: #fff;
+}
+.change-profile-picture:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+.change-profile-picture p {
+	color: #fff;
+}
+.change-profile-picture i {
+	filter: var(--ic-gray-200);
+}
+.upload-profile-picture {
+	display: none;
+	position: absolute;
+	top: 0;
+	opacity: 0;
+	background-color: #fff;
+	color: var(--color-primary);
+}
+.upload-profile-picture:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+.upload-profile-picture p {
+	color: var(--color-primary);
+}
+.upload-profile-picture i {
+	filter: var(--ic-primary);
+}
+.extra-text {
+	color: var(--text-dark-medium);
+}
+.toggle-container {
+	padding-top: 8px;
+	display: inline-block;
+}
+#pfEdit {
+		
+}
+#pfCancel {
+	display: none;
+}
+#pfSave {
+	display: none;
+}
+#addMoreLink {
+	display: none;
+}
+.toggle-container .toggle-switch {
+	margin-right: 8px;
+}
+input[type=checkbox].toggle-switch {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: var(--color-gray-100);
+    outline: 0;
+    cursor: pointer;
+    transition: background-color 0.09s ease-in-out;
+    position: relative;
+    vertical-align: bottom;
+}
+input[type=checkbox].toggle-switch:checked {
+    background-color: var(--color-primary);
+}
+input[type=checkbox].toggle-switch::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    transform: scale(0.7);
+    left: 0;
+    transition: left 0.09s ease-in-out;
+}
+input[type=checkbox].toggle-switch:checked::after {
+    left: 20px;
+}
+.settings-title-container.delete-account {
+	border-bottom: solid var(--color-red) 2px;
+}
+.settings-title-container.delete-account .settings-title {
+	color: var(--color-red);
+}
+.delete-account button {
+	background-color: var(--color-red);
+}
+#updateUserNameModal .filepath {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Fira Code", monospace;
+}
+#updateUserNameModal .filepath > div:first-child {
+    line-height: 40px;
+    margin-right: 4px;
+}
+#updateUserNameModal .filepath > div:nth-child(2) {
+	line-height: 40px;
+}
+#updateUserNameModal .filepath input {
+    font-family: "Fira Code", monospace;
+}
+#updateUserNameModal .filepath .input-items {
+	flex-grow: 0;
+}
+#updateUserNameModal .transfer-text {
+	width: 100%;
+    margin-top: 24px;
+	text-align: center;
+}

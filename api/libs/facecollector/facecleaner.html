@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				min-height:80vh;
+			}
+			body, section {
+				display:flex;
+				flex-direction:column;
+				align-items:flex-start;
+				justify-content:center;
+				
+			}
+			
+			#results {
+				flex-wrap:wrap;
+				height:70vh;
+				align-items:flex-start;
+				justify-content:flex-start;
+				width:90vw;
+			}
+			
+			img {
+				width:100px;
+			}
+			
+			img:hover {
+				opacity:50%;
+				cursor:pointer;
+			}
+			
+			input, button {
+				margin:5px;
+				
+			}
+		</style>
+		<script>
+			async function retrieve() {
+				const label = document.querySelector('#label').value;
+				const resp =  await fetch(`/getfaces?label=${label}`);
+				const result = await resp.text();
+				
+				document.querySelector('#results').innerHTML = result;
+				
+				const images = document.querySelectorAll('img');
+				images.forEach(image => {
+					image.addEventListener('click', function() {
+						deleteImage(image);		
+					});
+				})
+				
+			}
+			
+			async function deleteImage($img) {
+				const id = $img.getAttribute('dataid');
+				$img.parentElement.removeChild($img);
+				const resp = await fetch(`/face/${id}`, {method: 'DELETE'})
+				
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<section>
+			<input name='label' id='label' placeholder='Whose Face?'>
+			<button onclick='retrieve()'>Retrieve from Database</button>
+		</section>
+		<section id='results'>
+			
+			
+			
+		</section>
+	</body>
+</html>

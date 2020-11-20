@@ -1,0 +1,61 @@
+#share {
+	font-family: helvetica;
+	position: fixed;
+	right: 0%;
+	top: 0%;
+	width: 25%;
+	height: 100%;
+	background-color: lightgray;
+	padding: 1%;
+	display: none;
+}
+
+#shareText {
+	text-align: center;
+}
+
+input[type=text] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+#submit {
+	width: 20%;
+	padding: 12px 0px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+#submit:hover {
+	
+}
+
+.right {
+	text-align: right;
+}
+
+#file-div {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#collaber-div {
+	margin-top: 1em;
+	margin-bottom: 3em;
+}
+
+#invite-div {
+	margin-top: 1em;
+}
+
+#close-sidepanel {
+	font-size: 1.5em;
+	cursor: pointer;
+}

@@ -1,0 +1,49 @@
+#gitStatusTextArea {
+    width: 100%;
+    height: 200px;
+    background-color: initial !important;
+    color: initial !important;
+}
+
+#pastGitConfigsList {
+    width: 100%;
+
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+    text-indent: 10px;
+    list-style: none;
+}
+
+#pastGitConfigsList > li {
+    line-height: 25px;
+}
+
+#pastGitConfigsList > li:nth-child(even) {
+    background: #ccc;
+}
+
+#pastGitConfigsListContainer {
+    border: 5px solid #000;
+    height: 100px;
+    width: 100%;
+	overflow-y:scroll;
+    height: 200px;
+}
+
+.pastGitConfigsListBigBox {
+	display: grid;
+	grid-template-columns: 90% auto;
+}
+
+
+.pastGitConfigsListItemBox {
+    /*width: 90%;*/
+    /*float: left;*/
+}
+
+.pastGitConfigsListItemButton {
+    /*width: 5%;*/
+    /* height: 100%; */
+    /*float: right;*/
+}

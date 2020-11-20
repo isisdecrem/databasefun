@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Admin</title>
+	<style>
+		body {
+			background-color:#232323;
+			color:#EFEFEF;
+		}
+
+		table {
+			margin:2em;
+		}
+
+		td{
+			padding:0.25em 1em;
+		}
+		a {
+			color: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Register Admin</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Schema</th>
+					<th>Create</th>
+					<th>View</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		var data = ||data||;
+		var $tbody = document.querySelector('tbody');
+		$tbody.innerHTML = data.map(d => {
+			var row = '<tr>';
+			row += '<td>' + d.name + '</td>';
+			row += '<td><a href="' + d.create + '" target="_blank">Create</td>';
+			row += '<td><a href="' + d.view + '" target="_blank">View</td>';
+			row += '</tr>';
+			return row;
+		}).join('\n');
+	</script>
+</body>
+
+</html>

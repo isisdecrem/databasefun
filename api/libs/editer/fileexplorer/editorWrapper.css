@@ -1,0 +1,214 @@
+* {
+	margin: 0;
+}
+
+
+body {
+	display: grid;
+	grid-template-columns: 1fr 99999fr;
+	width: 100vw;
+	height: 100vh;
+	overflow-y: auto;
+	top: 0;
+	left: 0;
+	position: absolute;
+	margin: 0;
+	text-align: center;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.fileexplorer-context-menu-button {
+	width: 100%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	text-align: left;
+	height: 3rem;
+	margin-top: 0.5rem;
+	display: flex;
+	align-items: center;
+}
+
+.fileexplorer-context-menu-button:last-child {
+	margin-bottom: 0.5rem;
+}
+
+.fileexplorer-context-menu-button:hover {
+	background: var(--color-gray-400);
+}
+
+
+.fileexplorer-context-menu {
+	position: absolute;
+	width: 15rem;
+	border-radius: 0.5rem;
+	min-height: 10rem;
+	background: var(--color-gray-300);
+}
+
+.fileexplorer-sidebar {
+	display: grid;
+	overflow-y: scroll;
+	overflow-x: auto;
+	min-width: 15vh;
+	width: 20vh;
+	resize: horizontal;
+	background: var(--color-gray-100);
+	grid-template-rows: 3em auto;
+}
+
+.fileexplorer-files {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	text-overflow: ellipsis;
+}
+
+.fileexplorer-files-folder {
+	position: relative;
+	height: 2em;
+	width: 100%;
+	margin-top: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	display: grid;
+	text-align: left;
+	grid-template-columns: 70% auto;
+}
+
+.fileexplorer-files-folder:hover {
+	background: var(--color-gray-400);
+}
+
+
+.fileexplorer-files-folder-open-indicator-container {
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.fileexplorer-files-folder-open-indicator {
+	height: 100%;
+}
+
+.fileexplorer-files-folder-text {
+	display: flex;
+	align-items: center;
+}
+
+.fileexplorer-files-file {
+	position: relative;
+	height: 2em;
+	width: 100%;
+	margin-top: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	display: flex;
+	align-items: center;
+	text-align: left;
+	justify-content: flex-start;
+}
+
+.fileexplorer-files-file:last-child {
+	margin-bottom: 0.5em;
+}
+
+.fileexplorer-files-file:hover {
+	background: var(--color-gray-400);
+}
+
+.fileexplorer-files-selected-file {
+	color: var(--color-primary);
+	background: var(--color-gray-400);
+}
+
+.fileexplorer-title-container {
+	height: 100%;
+	width: 100%;
+	background: var(--color-gray-300);
+	color: var(--color-primary);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.fileexplorer-editors-container {
+	width: 100%;
+	height: 100%;
+}
+
+.fileexplorer-editor-main {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 3em auto;
+}
+
+.fileexplorer-editor-tabs {
+	width: 100%;
+	height: 100%;
+	background: var(--color-gray-300);
+	overflow-x: scroll;
+	display: flex;
+}
+
+.fileexplorer-editor-active-tab {
+	background: var(--color-gray-400);
+	color: var(--color-primary);
+}
+
+.fileexplorer-editor-tab-close-button {
+	width: 100%;
+	height: 100%;
+}
+
+.fileexplorer-editor-tab-close-button-icon {
+	width: 100%;
+}
+
+.fileexplorer-editor-tab {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	min-width: 10rem;
+	max-width: 18rem;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	height: 100%;
+	text-align: center;
+	display: grid;
+	grid-template-columns: 85% auto;
+}
+
+.fileexplorer-editors-container {
+	background: var(--color-gray-200);
+}
+
+.fileexplorer-editor-tab-text {
+	display: flex;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	text-align: left;
+	text-overflow: ellipsis;
+	align-items: center;	
+	height: 90%;
+	width: 95%;
+}
+
+
+.fileexplorer-editor {
+	width: 100%;
+	height: 100%;
+}

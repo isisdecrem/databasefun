@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/libs/administrater/css/qoom.css">
+	</head>
+	<body>
+		{{fileData}}
+		<script type="module">
+			import Snackbar from '/libs/snackbar/script.js';
+			const $previewSnackbar = new Snackbar({
+				mode: 'previewAlert'
+				, id: 'previewSnackbar'
+				, message: `This is a preview of your profile page. To make it visible to anyone, turn on visibility in <a href="/settings" style="text-decoration: underline">Settings</a>`
+				, position: ''
+			});
+			$previewSnackbar.show();
+		</script>
+	</body>
+</html>

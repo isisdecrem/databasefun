@@ -1,0 +1,56 @@
+{
+    "name" : "update_latest_code",
+    "flow" : [
+    	{
+    		"step": "get_all_files"	
+    	},
+        {
+            "step" : "save_current_version"
+        },
+        {
+            "step" : "update_to_version"
+        }
+    ],
+    "steps" : [ 
+        {
+            "name" : "get_all_files",
+            "description" : "Gets a list of all files",
+            "app" : "updater",
+            "method" : "getCurrentFileList",  
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"requestDomain": "domain"
+            	}
+            },
+            "output": "allFiles"
+        },
+        {
+            "name" : "save_current_version",
+            "description" : "Creating a version for the files about to be pushed",
+            "app" : "versioner",
+            "method" : "createDeployVersion",
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"requestDomain": "domain"
+            		, "allFiles": "files"
+            	}
+            },
+            "output": "version"
+        },
+        {
+            "name" : "update_to_version",
+            "description" : "Pulls the latest changes",
+            "app" : "updater",
+            "method" : "pullChanges",
+            "input": {
+            	"fieldsFromRequestToUse": {
+            		"planetdb": "db"
+            		, "planet": "planet"
+            		, "ignore": "ignore"
+            		, "requestDomain": "domain"
+            		, "version": "version"
+            	}
+            }
+        }
+    ]
+}
