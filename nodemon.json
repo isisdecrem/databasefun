@@ -1,0 +1,5 @@
+{
+  "ext": "js"
+  , "delay": "100"
+  , "watch": ["./api/apps/**/*.js"]
+}

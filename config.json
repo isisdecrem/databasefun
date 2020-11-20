@@ -1,0 +1,20 @@
+{
+	"appDomain": "catfish.gunnhigh.school",
+	"cors": {},
+	"editer": {"disallow": false},
+	"email": {},
+	"ERROR_PAGE_URL": "https://core.qoom.io/error/maintenance",
+	"frontendonly": false,
+	"homeApp": "renderer",
+	"logger": {"destination": "console"},
+	"MAINTENANCE_PAGE_URL": "https://core.qoom.io/error/maintenance",
+	"MONGODB_URI": "mongodb://127.0.0.1:27017/qoom",
+	"registerDb": "mongodb://127.0.0.1:27017/qoom",
+	"renderer": {"folderDepth": 10},
+	"REQUIREHTTPS": false,
+	"restricter": "false",
+	"saver": {"default":"mongo"},
+	"explorer": {"explorePath": "/explore/list"},
+	"rackspace": {"offline": true },
+	"collaber": {"enabled": true, "url": "wss://qoom.rocks/api/realtime/convergence/default"}
+}
